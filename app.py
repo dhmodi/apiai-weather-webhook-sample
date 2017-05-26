@@ -15,12 +15,15 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
+import apiai
 # Flask app should start in global layout
 app = Flask(__name__)
+CLIENT_ACCESS_TOKEN = '9c2bd254053040148d9292dfe8081ece'
+
 
 @app.route('/')
 def index():
-   while(1):
+   while True:
         ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
         request = ai.text_request()
         request.lang = 'en'  # optional, default value equal 'en'
