@@ -23,6 +23,7 @@ CLIENT_ACCESS_TOKEN = '9c2bd254053040148d9292dfe8081ece'
 
 @app.route('/')
 def index():
+   print("\n\nStarting App")
    while True:
         ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
         request = ai.text_request()
