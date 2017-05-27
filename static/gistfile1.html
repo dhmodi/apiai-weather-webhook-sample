@@ -72,7 +72,9 @@
 		}
 
 		function updateRec() {
-			$("#rec").text(recognition ? "Stop" : "Speak");
+			// $("#rec").text(recognition ? "Stop" : "Speak");
+			image_url = (recognition ? "microphone-2104091_960_720.png" : "microphone-309680_960_720.png")
+			$("#rec").css('background-image', 'url(' + image_url + ')');
 		}
 
 		function send() {
@@ -159,6 +161,9 @@ $(this).attr("placeholder", "");
   background-color: #d9d9d9;
   padding-top: 15px;
   padding-bottom: 15px;
+  background-image: url("904.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 #bodybox {
@@ -174,6 +179,7 @@ $(this).attr("placeholder", "");
   padding-left: 25px;
   box-shadow: 5px 5px 5px grey;
   border-radius: 15px;
+  margin-left: 600px;
 }
 
 #chatborder {
@@ -198,7 +204,7 @@ $(this).attr("placeholder", "");
 #chatbox {
   font: 17px arial, sans-serif;
   height: 22px;
-  width: 80%;
+  width: 85%;
 }
 
 h1 {
@@ -208,6 +214,15 @@ h1 {
 pre {
   background-color: #f0f0f0;
   margin-left: 20px;
+}
+
+#rec {
+    background:url("microphone-2104091_960_720.png");
+	background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width:40px;
+    height:40px;
+	border-style: none;
 }
 	</style>
 </head>
@@ -224,13 +239,13 @@ pre {
     <p id="chatlog3" class="chatlog">&nbsp;</p>
     <p id="chatlog2" class="chatlog">&nbsp;</p>
     <p id="chatlog1" class="chatlog">&nbsp;</p>
-    <input type="text" name="chat" id="chatbox" placeholder="Hi there! Type or Speak here to talk to me."><button id="rec">Speak</button>
+    <input type="text" name="chat" id="chatbox" placeholder="Hi there! Type or Speak here to talk to me."><button id="rec"></button>
 	
 	
   </div>
 <!--	<div>
 		 <input id="input" type="text"> <button id="rec">Speak</button> 
-		 <br>Response<br> <textarea id="response" cols="40" rows="20"></textarea>
+		 <br>Response<br> <textarea id="response" cols="40" rows="20"></textarea>	
 		
 	</div>-->
 </body>
