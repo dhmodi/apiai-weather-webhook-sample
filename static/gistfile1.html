@@ -111,7 +111,7 @@
                 say = val.result.fulfillment.speech;
 				botMessage = say
 				messages.push("<b>" + botName + ":</b> " + botMessage);
-			   for (var i = 1; i < 8; i++) {
+			   for (var i = 1; i < 11; i++) {
       if (messages[messages.length - i])
         $("#chatlog" + i).html(messages[messages.length - i]);
 		}
@@ -144,7 +144,7 @@ function newEntry() {
 //    messages.push("<b>" + botName + ":</b> " + botMessage);
     // says the message using the text to speech function written below
     //outputs the last few array elements of messages to html
-    for (var i = 1; i < 8; i++) {
+    for (var i = 1; i < 11; i++) {
       if (messages[messages.length - i])
         $("#chatlog" + i).html(messages[messages.length - i]);
     }
@@ -218,6 +218,9 @@ pre {
 <body>
 <div id='bodybox'>
   <div id='chatborder'>
+   <p id="chatlog11" class="chatlog">&nbsp;</p>
+    <p id="chatlog10" class="chatlog">&nbsp;</p>
+	 <p id="chatlog9" class="chatlog">&nbsp;</p>
     <p id="chatlog7" class="chatlog">&nbsp;</p>
     <p id="chatlog6" class="chatlog">&nbsp;</p>
     <p id="chatlog5" class="chatlog">&nbsp;</p>
