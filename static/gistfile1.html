@@ -121,10 +121,6 @@
                 synth.speak(utterThis);
             }
 		}
-
-		
-
-
   //this runs each time enter is pressed.
 //It controls the overall input and output
 function newEntry() {
@@ -135,7 +131,7 @@ function newEntry() {
     //sets the chat box to be clear
     $("#chatbox").val("");
     //adds the value of the chatbox to the array messages
-    messages.push("Me:" + lastUserMessage);
+    messages.push("<b>Me:</b>" + lastUserMessage);
     //Speech(lastUserMessage);  //says what the user typed outloud
     //sets the variable botMessage in response to lastUserMessage
     send();
