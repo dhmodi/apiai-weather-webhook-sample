@@ -73,7 +73,7 @@
 
 		function updateRec() {
 			// $("#rec").text(recognition ? "Stop" : "Speak");
-			image_url = (recognition ? "microphone-2104091_960_720.png" : "microphone-309680_960_720.png")
+			image_url = (recognition ? "microphone-309680_960_720.png" : "microphone-2104091_960_720.png" )
 			$("#rec").css('background-image', 'url(' + image_url + ')');
 		}
 
@@ -203,8 +203,9 @@ $(this).attr("placeholder", "");
 
 #chatbox {
   font: 17px arial, sans-serif;
-  height: 22px;
-  width: 85%;
+  height: 30px;
+  width: 90%;
+  margin-right: 10px;
 }
 
 h1 {
@@ -217,12 +218,14 @@ pre {
 }
 
 #rec {
+    position: absolute;
     background:url("microphone-2104091_960_720.png");
 	background-size: 100% 100%;
     background-repeat: no-repeat;
     width:40px;
     height:40px;
 	border-style: none;
+	margin: auto;
 }
 	</style>
 </head>
