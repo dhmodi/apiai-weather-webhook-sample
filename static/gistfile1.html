@@ -80,8 +80,8 @@
 				data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
 
 				success: function(data) {
-					<!-- setResponse(JSON.stringify(data, undefined, 2)); -->
-					setResponse(data);
+					setResponse(JSON.stringify(data, undefined, 2));
+					setAudioResponse(data);
 				},
 				error: function() {
 					setResponse("Internal Server Error");
@@ -91,6 +91,10 @@
 		}
 
 		function setResponse(val) {
+			$("#response").text(val);
+            }
+			
+			function setAudioResponse(val) {
 			<!-- $("#response").text(val); -->
 			if (val.result) {
                 var say=""; 
