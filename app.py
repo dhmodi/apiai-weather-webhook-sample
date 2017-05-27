@@ -8,12 +8,14 @@ from urllib.parse import urlparse, urlencode
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
 
+
 import json
 import os
 
 from flask import Flask
 from flask import request
 from flask import make_response
+from flask import url_for, redirect
 
 import apiai
 # Flask app should start in global layout
@@ -39,6 +41,11 @@ def index():
         response_obj = json.loads(responsestr)
 
         print(response_obj["result"]["fulfillment"]["speech"])
+		
+		
+@app.route('/speech')
+def sppech():
+   return redirect(url_for('static', filename='gistfile1.html'))
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
