@@ -23,7 +23,7 @@ app = Flask(__name__)
 CLIENT_ACCESS_TOKEN = '872500f5983f46568df07d5ab0305eed'
 		
 @app.route('/speech')
-def sppech():
+def speech():
    return redirect(url_for('static', filename='gistfile1.html'))
 
 @app.route('/webhook', methods=['POST'])
