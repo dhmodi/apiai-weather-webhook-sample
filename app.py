@@ -2,12 +2,12 @@
 
 from __future__ import print_function
 from future.standard_library import install_aliases
+
 install_aliases()
 
 from urllib.parse import urlparse, urlencode
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
-
 
 import json
 import os
@@ -18,6 +18,7 @@ from flask import make_response
 from flask import url_for, redirect
 
 import apiai
+
 # Flask app should start in global layout
 app = Flask(__name__)
 CLIENT_ACCESS_TOKEN = '872500f5983f46568df07d5ab0305eed'
@@ -25,27 +26,28 @@ CLIENT_ACCESS_TOKEN = '872500f5983f46568df07d5ab0305eed'
 
 @app.route('/')
 def index():
-   print("\n\nStarting App")
-   while True:
+    print("\n\nStarting App")
+    while True:
         ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
         request = ai.text_request()
         request.lang = 'en'  # optional, default value equal 'en'
 
         # request.session_id = "<SESSION ID, UBIQUE FOR EACH USER>"
-        print("\n\nYour Input : ",end=" ")
+        print("\n\nYour Input : ", end=" ")
         request.query = input()
 
-        print("\n\nBot\'s response :",end=" ")
+        print("\n\nBot\'s response :", end=" ")
         response = request.getresponse()
         responsestr = response.read().decode('utf-8')
         response_obj = json.loads(responsestr)
 
         print(response_obj["result"]["fulfillment"]["speech"])
-		
-		
+
+
 @app.route('/speech')
 def speech():
-   return redirect(url_for('static', filename='gistfile1.html'))
+    return redirect(url_for('static', filename='gistfile1.html'))
+
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -80,9 +82,11 @@ def processRequest(req):
 def makeYqlQuery(req):
     result = req.get("result")
     parameters = result.get("parameters")
-    #address = parameters.get("address")
-    #city = address.get("ctiy")
-    city = parameters.get("city")
+    address = parameters.get("address")
+    if address is None:
+        return None
+    city = address.get("city")
+    # city = parameters.get("city")
     if city is None:
         return None
 
