@@ -44,7 +44,7 @@ def index():
 		
 		
 @app.route('/speech')
-def speech():
+def sppech():
    return redirect(url_for('static', filename='gistfile1.html'))
 
 @app.route('/webhook', methods=['POST'])
@@ -80,8 +80,7 @@ def processRequest(req):
 def makeYqlQuery(req):
     result = req.get("result")
     parameters = result.get("parameters")
-	address = parameters.get("address")
-    city = address.get("city")
+    city = parameters.get("geo-city")
     if city is None:
         return None
 
