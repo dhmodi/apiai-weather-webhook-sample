@@ -20,7 +20,7 @@ from flask import url_for, redirect
 import apiai
 # Flask app should start in global layout
 app = Flask(__name__)
-CLIENT_ACCESS_TOKEN = '9c2bd254053040148d9292dfe8081ece'
+CLIENT_ACCESS_TOKEN = '872500f5983f46568df07d5ab0305eed'
 
 
 @app.route('/')
@@ -44,7 +44,7 @@ def index():
 		
 		
 @app.route('/speech')
-def sppech():
+def speech():
    return redirect(url_for('static', filename='gistfile1.html'))
 
 @app.route('/webhook', methods=['POST'])
@@ -80,7 +80,9 @@ def processRequest(req):
 def makeYqlQuery(req):
     result = req.get("result")
     parameters = result.get("parameters")
-    city = parameters.get("geo-city")
+    #address = parameters.get("address")
+    #city = address.get("ctiy")
+    city = parameters.get("city")
     if city is None:
         return None
 
