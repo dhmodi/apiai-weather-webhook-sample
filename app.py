@@ -111,7 +111,7 @@ def makeSymptomsQuery(req):
     if symptoms is None:
         return None
 
-    return "symptoms=[" + symptoms + "]"
+    return "symptoms=" + symptoms
 
 
 
