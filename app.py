@@ -78,7 +78,7 @@ def processRequest(req):
         if yql_query is None:
             return {}
         yql_url = baseurl + yql_query + "&format=json"
-        print(yql_url)
+        #print(yql_url)
         result = urlopen(yql_url).read()
         #print(json.dumps(result))
         data = json.loads(result)
@@ -88,13 +88,13 @@ def processRequest(req):
     elif req.get("result").get("action") == "identify.doctor":
         baseurl = "https://api.betterdoctor.com/2016-03-01/doctors?skip=0&limit=1&user_key=8230d2719f3a549ea70e918951350c93&"
         yql_query = makeDoctorQuery(req)
-        print(yql_query)
+        #print(yql_query)
         if yql_query is None:
             return {}
         yql_url = baseurl + urlencode({'query': yql_query})
-        print(yql_url)
+        #print(yql_url)
         result = urlopen(yql_url).read()
-        print(json.dumps(result))
+        #print(json.dumps(result))
         data = json.loads(result)
         res = makeWebhookDoctorResult(data)
         return res
@@ -119,8 +119,8 @@ def makeSymptomsQuery(req):
     result = req.get("result")
     parameters = result.get("parameters")
     symptoms = parameters.get("symptoms")
-    print(json.dumps(parameters))
-    print(json.dumps(symptoms))
+    #print(json.dumps(parameters))
+    #print(json.dumps(symptoms))
     if symptoms is None:
         return None
 
@@ -129,19 +129,19 @@ def makeSymptomsQuery(req):
         list = list + a
         list = list + ","
 
-    print(list)
+    #print(list)
     return "symptoms=[" + list + "]"
 
 def makeDoctorQuery(req):
     result = req.get("result")
     parameters = result.get("parameters")
     symptoms = parameters.get("symptoms2")
-    print(json.dumps(parameters))
-    print(json.dumps(symptoms))
+   # print(json.dumps(parameters))
+   # print(json.dumps(symptoms))
     if symptoms is None:
         return None
 
-    print(json.dumps(symptoms))
+    #print(json.dumps(symptoms))
     return json.dumps(symptoms)
 
 
