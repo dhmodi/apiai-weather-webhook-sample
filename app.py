@@ -69,6 +69,17 @@ def processRequest(req):
         data = json.loads(result)
         res = makeWebhookTemperatureResult(data)
         return res
+    if req.get("result").get("action") == "identify.disease":
+        baseurl = "https://sandbox-healthservice.priaid.ch/diagnosis?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImFsYWwuYWxtbGxAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiIxNzE3IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy92ZXJzaW9uIjoiMjAwIiwiaHR0cDovL2V4YW1wbGUub3JnL2NsYWltcy9saW1pdCI6Ijk5OTk5OTk5OSIsImh0dHA6Ly9leGFtcGxlLm9yZy9jbGFpbXMvbWVtYmVyc2hpcCI6IlByZW1pdW0iLCJodHRwOi8vZXhhbXBsZS5vcmcvY2xhaW1zL2xhbmd1YWdlIjoiZW4tZ2IiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL2V4cGlyYXRpb24iOiIyMDk5LTEyLTMxIiwiaHR0cDovL2V4YW1wbGUub3JnL2NsYWltcy9tZW1iZXJzaGlwc3RhcnQiOiIyMDE3LTA1LTMwIiwiaXNzIjoiaHR0cHM6Ly9zYW5kYm94LWF1dGhzZXJ2aWNlLnByaWFpZC5jaCIsImF1ZCI6Imh0dHBzOi8vaGVhbHRoc2VydmljZS5wcmlhaWQuY2giLCJleHAiOjE0OTYxMzA0MDYsIm5iZiI6MTQ5NjEyMzIwNn0.hejsa1UK29gubSMuTUCCaZwlgJtCguskYowMByDJJ5E&gender=male&language=en-gb&year_of_birth=1988&"
+
+        yql_query = makeSymptomsQuery(req)
+        if yql_query is None:
+            return {}
+        yql_url = baseurl + urlencode(yql_query) + "&format=json"
+        result = urlopen(yql_url).read()
+        data = json.loads(result)
+        res = makeWebhookDiagnosisResult(data)
+        return res
     else:
         return {}
 
@@ -85,6 +96,15 @@ def makeYqlQuery(req):
         return None
 
     return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "')"
+
+def makeSymptomsQuery(req):
+    result = req.get("result")
+    parameters = result.get("parameters")
+    symptoms = parameters.get("symptoms")
+    if symptoms is None:
+        return None
+    return "symptoms=[" + symptoms + "]"
+
 
 
 def makeWebhookWeatherResult(data):
@@ -113,7 +133,7 @@ def makeWebhookWeatherResult(data):
     # print(json.dumps(item, indent=4))
 
     speech = "Today in " + location.get('city') + ": " + condition.get('text') + \
-             ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
+             "the temperature is " + condition.get('temp') + " " + units.get('temperature')
 
     print("Response:")
     print(speech)
@@ -165,6 +185,37 @@ def makeWebhookTemperatureResult(data):
         "source": "apiai-weather-webhook-sample"
     }
 
+def makeWebhookDiagnosisResult(data):
+    result = json.loads(data)
+    if result is None:
+        return {}
+
+    issue = result['Issue'][1]
+    if issue is None:
+        return {}
+
+    name = result['Issue'][1]['Name']
+    if name is None:
+        return {}
+
+    diagnosis = result['Issue'][1]['IcdName']
+    if diagnosis is None:
+        return {}
+
+    # print(json.dumps(item, indent=4))
+
+    speech = "You might be experiencing " + name + ". These are signs of " + diagnosis
+
+    print("Response:")
+    print(speech)
+
+    return {
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+    }
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
