@@ -102,6 +102,7 @@ def makeSymptomsQuery(req):
     parameters = result.get("parameters")
     symptoms = parameters.get("symptoms")
     print(parameters)
+    print(symptoms)
     if symptoms is None:
         return None
     return "symptoms=[" + symptoms + "]"
