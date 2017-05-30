@@ -111,7 +111,11 @@ def makeSymptomsQuery(req):
     if symptoms is None:
         return None
 
-    return "symptoms=" + json.dumps(symptoms)
+    for a in symptoms:
+        list = list + a
+        list = list + ","
+
+    return "symptoms=[" + list + "]"
 
 
 
