@@ -116,6 +116,7 @@ def makeSymptomsQuery(req):
             list = a
         list = list + "," + a
 
+    print(list)
     return "symptoms=[" + list + "]"
 
 
