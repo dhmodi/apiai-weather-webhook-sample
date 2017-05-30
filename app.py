@@ -77,8 +77,8 @@ def processRequest(req):
         print(yql_query)
         if yql_query is None:
             return {}
-        yql_url = baseurl + urlencode(yql_query) + "&format=json"
-        #print(yql_url)
+        yql_url = baseurl + yql_query + "&format=json"
+        print(yql_url)
         result = urlopen(yql_url).read()
         print(json.dumps(result))
         data = json.loads(result)
