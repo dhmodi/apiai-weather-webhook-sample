@@ -78,7 +78,7 @@ def processRequest(req):
         if yql_query is None:
             return {}
         yql_url = baseurl + yql_query + "&format=json"
-        #print(yql_url)
+        print(yql_url)
         result = urlopen(yql_url).read()
         #print(json.dumps(result))
         data = json.loads(result)
@@ -261,27 +261,27 @@ def makeWebhookDoctorResult(data):
     result = data.get('data')
     if result is None:
         return {}
-    print(json.dumps(result, indent=4))
+    #print(json.dumps(result, indent=4))
 
     docList = result[0]
     if docList is None:
         return {}
 
-    print(json.dumps(docList, indent=4))
+    #print(json.dumps(docList, indent=4))
     practices = docList['practices'][0]
     if practices is None:
         return {}
-    print(json.dumps(practices, indent=4))
+    #print(json.dumps(practices, indent=4))
 
     name = practices['name']
-    print(json.dumps(name, indent=4))
+  #  print(json.dumps(name, indent=4))
 
     visit_address = practices['visit_address']['city']
-    print(json.dumps(visit_address, indent=4))
+   # print(json.dumps(visit_address, indent=4))
 
     phones = practices['phones'][0]['number']
 
-    print(json.dumps(phones, indent=4))
+   # print(json.dumps(phones, indent=4))
 
     speech = "Please visit Dr. " + name + ". The clinic is located in " + visit_address + ". For further details, contact him at " + phones + "."
 
