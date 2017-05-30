@@ -91,7 +91,7 @@ def processRequest(req):
         print(yql_query)
         if yql_query is None:
             return {}
-        yql_url = baseurl + yql_query
+        yql_url = baseurl + urlencode({'query': yql_query})
         print(yql_url)
         result = urlopen(yql_url).read()
         print(json.dumps(result))
@@ -142,7 +142,7 @@ def makeDoctorQuery(req):
         return None
 
     print(json.dumps(symptoms))
-    return "query=" + json.dumps(symptoms)
+    return json.dumps(symptoms)
 
 
 
