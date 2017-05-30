@@ -258,23 +258,28 @@ def makeWebhookDiagnosisResult(data):
     }
 
 def makeWebhookDoctorResult(data):
-    result = data.get("data")
+    result = data.get('data')
     if result is None:
         return {}
+    print(json.dumps(result, indent=4))
 
     docList = result[0]
     if docList is None:
         return {}
 
-    practices = docList.get("practices")[0]
+    print(json.dumps(docList, indent=4))
+    practices = docList['practices'][0]
     if practices is None:
         return {}
+    print(json.dumps(practices, indent=4))
 
     name = practices['name']
+    print(json.dumps(name, indent=4))
+
     visit_address = practices['visit_address']['city']
     phones = practices['phones'][0]['number']
 
-    # print(json.dumps(item, indent=4))
+    print(json.dumps(item, indent=4))
 
     speech = "Please visit Dr. " + name + ". His clinic is located in " + visit_address + ". For further details, contact him at " + phones + "."
 
