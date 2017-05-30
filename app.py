@@ -195,19 +195,19 @@ def makeWebhookTemperatureResult(data):
     }
 
 def makeWebhookDiagnosisResult(data):
-    result = json.loads(data)
+    result = data[1]
     if result is None:
         return {}
 
-    issue = result['Issue'][1]
+    issue = result['Issue']
     if issue is None:
         return {}
     print(issue)
-    name = result['Issue'][1]['Name']
+    name = result['Issue']['Name']
     if name is None:
         return {}
 
-    diagnosis = result['Issue'][1]['IcdName']
+    diagnosis = result['Issue']['IcdName']
     if diagnosis is None:
         return {}
 
