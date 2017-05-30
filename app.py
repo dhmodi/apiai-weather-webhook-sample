@@ -202,7 +202,7 @@ def makeWebhookDiagnosisResult(data):
     issue = data['Issue'][1]
     if issue is None:
         return {}
-
+    print(issue)
     name = data['Issue'][1]['Name']
     if name is None:
         return {}
