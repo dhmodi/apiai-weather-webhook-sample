@@ -110,11 +110,12 @@ def makeSymptomsQuery(req):
     print(symptoms)
     if symptoms is None:
         return None
-    for a in symptoms.values():
+
+    for a in symptoms:
         if list is None:
             list = a
         list = list + "," + a
-        
+
     return "symptoms=[" + list + "]"
 
 
