@@ -42,7 +42,7 @@ def webhook():
     res = processRequest(req)
 
     res = json.dumps(res, indent=4)
-    # print(res)
+    print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
@@ -148,6 +148,7 @@ def makeWebhookWeatherResult(data):
     }
 
 def makeWebhookTemperatureResult(data):
+    print(json.dumps(data))
     query = data.get('query')
     if query is None:
         return {}
