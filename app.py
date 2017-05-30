@@ -195,7 +195,7 @@ def makeWebhookTemperatureResult(data):
     }
 
 def makeWebhookDiagnosisResult(data):
-    result = data[1]
+    result = data[0]
     if result is None:
         return {}
 
