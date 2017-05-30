@@ -78,8 +78,9 @@ def processRequest(req):
         if yql_query is None:
             return {}
         yql_url = baseurl + urlencode(yql_query) + "&format=json"
-        print(yql_url)
+        #print(yql_url)
         result = urlopen(yql_url).read()
+        print(json.dumps(result))
         data = json.loads(result)
         res = makeWebhookDiagnosisResult(data)
         return res
@@ -194,19 +195,19 @@ def makeWebhookTemperatureResult(data):
     }
 
 def makeWebhookDiagnosisResult(data):
-    result = json.loads(data)
-    if result is None:
-        return {}
+    #result = json.loads(data)
+    #if result is None:
+    #    return {}
 
-    issue = result['Issue'][1]
+    issue = data['Issue'][1]
     if issue is None:
         return {}
 
-    name = result['Issue'][1]['Name']
+    name = data['Issue'][1]['Name']
     if name is None:
         return {}
 
-    diagnosis = result['Issue'][1]['IcdName']
+    diagnosis = data['Issue'][1]['IcdName']
     if diagnosis is None:
         return {}
 
