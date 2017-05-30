@@ -85,6 +85,19 @@ def processRequest(req):
         res = makeWebhookDiagnosisResult(data)
         return res
 
+    elif req.get("result").get("action") == "identify.doctor":
+        baseurl = "https://api.betterdoctor.com/2016-03-01/doctors?skip=0&limit=1&user_key=8230d2719f3a549ea70e918951350c93&"
+        yql_query = makeSymptomsQuery(req)
+        #print(yql_query)
+        if yql_query is None:
+            return {}
+        yql_url = baseurl + yql_query
+        #print(yql_url)
+        result = urlopen(yql_url).read()
+        #print(json.dumps(result))
+        data = json.loads(result)
+        res = makeWebhookDoctorResult(data)
+        return res
     else:
         return {}
 
@@ -220,6 +233,38 @@ def makeWebhookDiagnosisResult(data):
     # print(json.dumps(item, indent=4))
 
     speech = "You might be experiencing " + name + ". These are signs of " + diagnosis
+
+    print("Response:")
+    print(speech)
+
+    return {
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+    }
+
+def makeWebhookDoctorResult(data):
+    result = data.get("data")
+    if result is None:
+        return {}
+
+    docList = result[0]
+    if docList is None:
+        return {}
+
+    practices = docList.get("practices")[0]
+    if practices is None:
+        return {}
+
+    name = practices['name']
+    visit_address = practices['visit_address']['city']
+    phones = practices['phones'][0]['number']
+
+    # print(json.dumps(item, indent=4))
+
+    speech = "Please visit Dr. " + name + ". His clinic is located in " + visit_address + ". For further details, contact him at " + phones + "."
 
     print("Response:")
     print(speech)
