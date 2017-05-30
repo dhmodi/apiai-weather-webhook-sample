@@ -21,27 +21,10 @@ import apiai
 
 # Flask app should start in global layout
 app = Flask(__name__)
-CLIENT_ACCESS_TOKEN = '872500f5983f46568df07d5ab0305eed'
-
 
 @app.route('/')
 def index():
-    print("\n\nStarting App")
-    while True:
-        ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
-        request = ai.text_request()
-        request.lang = 'en'  # optional, default value equal 'en'
-
-        # request.session_id = "<SESSION ID, UBIQUE FOR EACH USER>"
-        print("\n\nYour Input : ", end=" ")
-        request.query = input()
-
-        print("\n\nBot\'s response :", end=" ")
-        response = request.getresponse()
-        responsestr = response.read().decode('utf-8')
-        response_obj = json.loads(responsestr)
-
-        print(response_obj["result"]["fulfillment"]["speech"])
+ return {}
 
 
 @app.route('/speech')
