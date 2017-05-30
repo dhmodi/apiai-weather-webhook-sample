@@ -91,7 +91,7 @@ def processRequest(req):
         print(yql_query)
         if yql_query is None:
             return {}
-        yql_url = baseurl + urlencode(yql_query)
+        yql_url = baseurl + yql_query
         print(yql_url)
         result = urlopen(yql_url).read()
         print(json.dumps(result))
