@@ -155,8 +155,8 @@ def makeDoctorQuery(req):
         if response2 is None:
             return None
         print(json.dumps(response2))
-        latitude = response[0]['geometry']['location']['lat']
-        longitude = response[0]['geometry']['location']['lng']
+        latitude = response2[0]['geometry']['location']['lat']
+        longitude = response2[0]['geometry']['location']['lng']
         if (latitude is None) or (longitude is None):
             return None
         print(json.dumps(latitude))
