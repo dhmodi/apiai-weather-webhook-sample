@@ -122,7 +122,7 @@ def processRequest(req):
             print(json.dumps(latitude))
             print(json.dumps(longitude))
             if (symptoms is None) or (not symptoms):
-                yql_url = baseurl + urlencode({'location': json.dumps(latitude) + ',' + json.dumps(longitude) + ',100'})
+                yql_url = baseurl + urlencode({'location': json.dumps(latitude) + ',' + json.dumps(longitude) + ',1'})
             else:
                 yql_url = baseurl + urlencode({'query': json.dumps(symptoms), 'location': json.dumps(latitude) + ',' + json.dumps(longitude) + ',100'})
             print(yql_url)
