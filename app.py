@@ -121,7 +121,7 @@ def processRequest(req):
                 return None
             print(json.dumps(latitude))
             print(json.dumps(longitude))
-            yql_url = baseurl + urlencode({'query': json.dumps(symptoms), 'location': latitude + ',' + longitude + ',100'})
+            yql_url = baseurl + urlencode({'query': json.dumps(symptoms), 'location': json.dumps(latitude) + ',' + json.dumps(longitude) + ',100'})
             print(yql_url)
             result = urlopen(yql_url).read()
             print(json.dumps(result))
