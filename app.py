@@ -92,10 +92,10 @@ def processRequest(req):
         city = parameters.get("geo-city")
         symptoms = parameters.get("symptoms2")
         print(json.dumps(symptoms))
-        if symptoms is None:
-            return None
         print(json.dumps(city))
         if (city is None) or (not city):
+            if symptoms is None:
+                return None
             yql_url = baseurl + urlencode({'query': json.dumps(symptoms)})
             print(yql_url)
             result = urlopen(yql_url).read()
@@ -121,7 +121,10 @@ def processRequest(req):
                 return None
             print(json.dumps(latitude))
             print(json.dumps(longitude))
-            yql_url = baseurl + urlencode({'query': json.dumps(symptoms), 'location': json.dumps(latitude) + ',' + json.dumps(longitude) + ',100'})
+            if symptoms is None:
+                yql_url = baseurl + urlencode({'location': json.dumps(latitude) + ',' + json.dumps(longitude) + ',100'})
+            else:
+                yql_url = baseurl + urlencode({'query': json.dumps(symptoms), 'location': json.dumps(latitude) + ',' + json.dumps(longitude) + ',100'})
             print(yql_url)
             result = urlopen(yql_url).read()
             print(json.dumps(result))
