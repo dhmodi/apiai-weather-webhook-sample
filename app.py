@@ -159,6 +159,8 @@ def makeDoctorQuery(req):
         longitude = response[0]['geometry']['location']['lng']
         if (latitude is None) or (longitude is None):
             return None
+        print(json.dumps(latitude))
+        print(json.dumps(longitude))
         return urlencode({'query': json.dumps(symptoms), 'location': latitude + "," + longitude})
 
 
