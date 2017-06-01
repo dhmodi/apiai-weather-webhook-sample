@@ -87,19 +87,47 @@ def processRequest(req):
 
     elif req.get("result").get("action") == "identify.doctor":
         baseurl = "https://api.betterdoctor.com/2016-03-01/doctors?skip=0&limit=1&user_key=8230d2719f3a549ea70e918951350c93&"
-        yql_query = makeDoctorQuery(req)
-        print(yql_query)
-        if yql_query is None:
-            return {}
-        yql_url = baseurl + yql_query
-        print(yql_url)
-        result = urlopen(yql_url).read()
-        print(json.dumps(result))
-        data = json.loads(result)
-        res = makeWebhookDoctorResult(data)
-        return res
-    else:
-        return {}
+        result = req.get("result")
+        parameters = result.get("parameters")
+        city = parameters.get("geo-city")
+        symptoms = parameters.get("symptoms2")
+        print(json.dumps(symptoms))
+        if symptoms is None:
+            return None
+        print(json.dumps(city))
+        if city is None:
+            yql_url = baseurl + urlencode({'query': json.dumps(symptoms)})
+            print(yql_url)
+            result = urlopen(yql_url).read()
+            print(json.dumps(result))
+            data = json.loads(result)
+            res = makeWebhookDoctorResult(data)
+            return  res
+        else:
+            googleurl = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCQiBWiGy-aaNrthZCShG8sOs3G_ynJkEI&"
+            q = urlencode({'address': city})
+            yql_url = googleurl + q
+            print(yql_url)
+            result = urlopen(yql_url).read()
+            print(json.dumps(result))
+            data = json.loads(result)
+            response2 = data.get('results')
+            if response2 is None:
+                return None
+            print(json.dumps(response2))
+            latitude = response2[0]['geometry']['location']['lat']
+            longitude = response2[0]['geometry']['location']['lng']
+            if (latitude is None) or (longitude is None):
+                return None
+            print(json.dumps(latitude))
+            print(json.dumps(longitude))
+            yql_url = baseurl + urlencode({'query': json.dumps(symptoms), 'location': latitude + "," + longitude})
+            print(yql_url)
+            result = urlopen(yql_url).read()
+            print(json.dumps(result))
+            data = json.loads(result)
+            res = makeWebhookDoctorResult(data)
+            return res
 
 
 def makeYqlQuery(req):
