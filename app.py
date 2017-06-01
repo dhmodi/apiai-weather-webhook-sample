@@ -88,10 +88,10 @@ def processRequest(req):
     elif req.get("result").get("action") == "identify.doctor":
         baseurl = "https://api.betterdoctor.com/2016-03-01/doctors?skip=0&limit=1&user_key=8230d2719f3a549ea70e918951350c93&"
         yql_query = makeDoctorQuery(req)
-        #print(yql_query)
+        print(yql_query)
         if yql_query is None:
             return {}
-        yql_url = baseurl + urlencode({'query': yql_query})
+        yql_url = baseurl + yql_query
         #print(yql_url)
         result = urlopen(yql_url).read()
         #print(json.dumps(result))
