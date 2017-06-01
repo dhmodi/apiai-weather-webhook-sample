@@ -136,13 +136,31 @@ def makeDoctorQuery(req):
     result = req.get("result")
     parameters = result.get("parameters")
     symptoms = parameters.get("symptoms2")
+	if symptoms is None:
+        return None
+	city = parameters.get("geo-city")
+	if city is None:
    # print(json.dumps(parameters))
    # print(json.dumps(symptoms))
-    if symptoms is None:
-        return None
-
-    #print(json.dumps(symptoms))
-    return json.dumps(symptoms)
+   #print(json.dumps(symptoms))
+		return urlencode({'query': json.dumps(symptoms)})
+	else:
+		baseurl = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCQiBWiGy-aaNrthZCShG8sOs3G_ynJkEI&"
+		q = urlencode({'address': city})
+		yql_url = baseurl + q
+        #print(yql_url)
+        result = urlopen(yql_url).read()
+        #print(json.dumps(result))
+        data = json.loads(result)
+        response = data.get('results')
+		if response is None:
+			return None
+		latitude = response[0]['geometry']['location']['lat']
+		longitude = response[0]['geometry']['location']['lng']
+		if ((latitude is None) or (longitude is None))
+			return None
+		
+		return urlencode({'query': json.dumps(symptoms), 'location': latitude + "," + longitude})
 
 
 
