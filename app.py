@@ -135,11 +135,11 @@ def makeSymptomsQuery(req):
 def makeDoctorQuery(req):
     result = req.get("result")
     parameters = result.get("parameters")
+    city = parameters.get("geo-city")
     symptoms = parameters.get("symptoms2")
     print(json.dumps(symptoms))
     if symptoms is None:
         return None
-	city = parameters.get("geo-city")
     print(json.dumps(city))
     if city is None:
         return urlencode({'query': json.dumps(symptoms)})
