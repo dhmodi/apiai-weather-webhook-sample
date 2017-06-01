@@ -136,7 +136,7 @@ def makeDoctorQuery(req):
     result = req.get("result")
     parameters = result.get("parameters")
     symptoms = parameters.get("symptoms2")
-	if symptoms is None:
+    if symptoms is None:
         return None
 	city = parameters.get("geo-city")
 	if city is None:
@@ -152,16 +152,15 @@ def makeDoctorQuery(req):
         result = urlopen(yql_url).read()
         print(json.dumps(result))
         data = json.loads(result)
-        response = data.get('results')
-		if response is None:
-			return None
-		print(json.dumps(response))
-		latitude = response[0]['geometry']['location']['lat']
-		longitude = response[0]['geometry']['location']['lng']
-		if ((latitude is None) or (longitude is None))
-			return None
-		
-		return urlencode({'query': json.dumps(symptoms), 'location': latitude + "," + longitude})
+        response2 = data.get('results')
+        if response2 is None:
+            return None
+        print(json.dumps(response))
+        latitude = response[0]['geometry']['location']['lat']
+        longitude = response[0]['geometry']['location']['lng']
+        if (latitude is None) or (longitude is None):
+            return None
+        return urlencode({'query': json.dumps(symptoms), 'location': latitude + "," + longitude})
 
 
 
