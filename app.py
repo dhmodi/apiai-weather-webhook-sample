@@ -148,13 +148,14 @@ def makeDoctorQuery(req):
 		baseurl = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCQiBWiGy-aaNrthZCShG8sOs3G_ynJkEI&"
 		q = urlencode({'address': city})
 		yql_url = baseurl + q
-        #print(yql_url)
+        print(yql_url)
         result = urlopen(yql_url).read()
-        #print(json.dumps(result))
+        print(json.dumps(result))
         data = json.loads(result)
         response = data.get('results')
 		if response is None:
 			return None
+		print(json.dumps(response))
 		latitude = response[0]['geometry']['location']['lat']
 		longitude = response[0]['geometry']['location']['lng']
 		if ((latitude is None) or (longitude is None))
