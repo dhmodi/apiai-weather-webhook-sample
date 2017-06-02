@@ -95,7 +95,13 @@ def processRequest(req):
         print(json.dumps(city))
         if (city is None) or (not city):
             if (symptoms is None) or (not symptoms):
-                return None
+                return {
+                    "speech": "Please provide either symptom or location for the search",
+                    "displayText": "Please provide either symptom or location for the search",
+                    # "data": data,
+                    # "contextOut": [],
+                    "source": "apiai-weather-webhook-sample"
+                }
             yql_url = baseurl + urlencode({'query': json.dumps(symptoms)})
             print(yql_url)
             result = urlopen(yql_url).read()
@@ -113,12 +119,24 @@ def processRequest(req):
             data = json.loads(result)
             response2 = data.get('results')
             if response2 is None:
-                return None
+                return {
+                    "speech": "Please re-try with different query",
+                    "displayText": "Please re-try with different query",
+                    # "data": data,
+                    # "contextOut": [],
+                    "source": "apiai-weather-webhook-sample"
+                }
             print(json.dumps(response2))
             latitude = response2[0]['geometry']['location']['lat']
             longitude = response2[0]['geometry']['location']['lng']
             if (latitude is None) or (longitude is None):
-                return None
+                return {
+                    "speech": "Please re-try with different query",
+                    "displayText": "Please re-try with different query",
+                    # "data": data,
+                    # "contextOut": [],
+                    "source": "apiai-weather-webhook-sample"
+                }
             print(json.dumps(latitude))
             print(json.dumps(longitude))
             if (symptoms is None) or (not symptoms):
