@@ -94,7 +94,6 @@ def processRequest(req):
         #print(json.dumps(symptoms))
         context = result.get("contexts")
         #print(json.dumps(context[1]))
-        disease = false
         cName = context[1].get("name")
         print(json.dumps(cName))
         if (cName is "identifydisease-followup") or (cName == "identifydisease-followup"):
