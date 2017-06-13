@@ -93,11 +93,11 @@ def processRequest(req):
         symptoms = parameters.get("symptoms2")
         #print(json.dumps(symptoms))
         context = result.get("contexts")
-        print(json.dumps(context[1]))
+        #print(json.dumps(context[1]))
         disease = false
         cName = context[1].get("name")
         print(json.dumps(cName))
-        if cName == "identifydisease-followup":
+        if (cName is "identifydisease-followup") or (cName == "identifydisease-followup"):
             symptoms = context[1]['parameters']['symptoms.original']
 
         print(json.dumps(symptoms))
