@@ -96,6 +96,7 @@ def processRequest(req):
         print(json.dumps(context[1]))
         disease = false
         cName = context[1]['name']
+        print(json.dumps(cName))
         if cName == "identifydisease-followup":
             symptoms = context[1]['symptoms.original']
 
