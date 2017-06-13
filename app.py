@@ -95,10 +95,10 @@ def processRequest(req):
         context = result.get("contexts")
         print(json.dumps(context[1]))
         disease = false
-        cName = context[1]['name']
+        cName = context[1].get("name")
         print(json.dumps(cName))
         if cName == "identifydisease-followup":
-            symptoms = context[1]['symptoms.original']
+            symptoms = context[1]['parameters']['symptoms.original']
 
         print(json.dumps(symptoms))
         print(json.dumps(city))
