@@ -91,9 +91,9 @@ def processRequest(req):
         parameters = result.get("parameters")
         city = parameters.get("geo-city")
         symptoms = parameters.get("symptoms2")
-        print(json.dumps(symptoms))
+        #print(json.dumps(symptoms))
         context = result.get("contexts")
-        print(json.dumps(context))
+        print(json.dumps(context[1]))
         disease = false
         for lcontext in context:
             print(json.dumps(lcontext))
