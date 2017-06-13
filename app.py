@@ -92,7 +92,7 @@ def processRequest(req):
         city = parameters.get("geo-city")
         symptoms = parameters.get("symptoms2")
         print(json.dumps(symptoms))
-        context = req.get("contexts")
+        context = result.get("contexts")
         print(json.dumps(context))
         disease = false
         for lcontext in context:
