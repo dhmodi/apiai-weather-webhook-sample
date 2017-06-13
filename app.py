@@ -91,6 +91,14 @@ def processRequest(req):
         parameters = result.get("parameters")
         city = parameters.get("geo-city")
         symptoms = parameters.get("symptoms2")
+        context = req.get("contexts")
+        disease = false
+        for lcontext in context:
+            cName = lcontext.get("name")
+            if cName == "identifydisease-followup":
+                disease = true
+                symptoms = lcontext.get("symptoms.original")
+
         print(json.dumps(symptoms))
         print(json.dumps(city))
         if (city is None) or (not city):
