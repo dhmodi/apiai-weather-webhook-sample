@@ -360,7 +360,7 @@ def makeWebhookDoctorResult(data):
         "speech": speech,
         "displayText": speech,
         # "data": data,
-        # "contextOut": [],
+        "contextOut": [{"name":"identifydoctor-followup", "lifespan":5, "parameters":{"doctor":name}}],
         "source": "apiai-weather-webhook-sample"
     }
 
