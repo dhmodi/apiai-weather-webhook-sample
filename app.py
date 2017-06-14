@@ -414,7 +414,7 @@ def makeWebhookDoctorResult(data):
 
    # print(json.dumps(phones, indent=4))
 
-    speech = "Please visit Dr. " + name + ". The clinic is located in " + visit_address + ". For further details, contact him at " + phones + "."
+    speech = "Please visit Dr. " + name + ". The clinic is located in " + visit_address + ". For further details, contact him at " + phones + ". Do you want to schedule an appointment?"
 
     print("Response:")
     print(speech)
