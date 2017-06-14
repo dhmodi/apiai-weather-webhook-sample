@@ -283,7 +283,7 @@ def makeWebhookWeatherResult(data):
         "displayText": speech,
         # "data": data,
         # "contextOut": [],
-        "source": "apiai-weather-webhook-sample"
+        "source": "virtual-patient-assistant"
     }
 
 def makeWebhookTemperatureResult(data):
@@ -323,7 +323,7 @@ def makeWebhookTemperatureResult(data):
         "displayText": speech,
         # "data": data,
         # "contextOut": [],
-        "source": "apiai-weather-webhook-sample"
+        "source": "virtual-patient-assistant"
     }
 
 def makeWebhookDiagnosisResult(data):
@@ -356,7 +356,7 @@ def makeWebhookDiagnosisResult(data):
         "displayText": speech,
         # "data": data,
         "contextOut": [{"name":"identifydisease-followup", "lifespan":5, "parameters":{"issue":id}}],
-        "source": "apiai-weather-webhook-sample"
+        "source": "virtual-patient-assistant"
     }
 
 def makeWebhookInfoResult(data):
@@ -385,7 +385,7 @@ def makeWebhookInfoResult(data):
         "displayText": description,
         # "data": data,
         #"contextOut": [{"name":"identifydisease-followup", "lifespan":5, "parameters":{"issue":id}}],
-        "source": "apiai-weather-webhook-sample"
+        "source": "virtual-patient-assistant"
     }
 
 def makeWebhookDoctorResult(data):
@@ -424,7 +424,7 @@ def makeWebhookDoctorResult(data):
         "displayText": speech,
         # "data": data,
         "contextOut": [{"name":"identifydoctor-followup", "lifespan":5, "parameters":{"doctor":name}}],
-        "source": "apiai-weather-webhook-sample"
+        "source": "virtual-patient-assistant"
     }
 
 if __name__ == '__main__':
