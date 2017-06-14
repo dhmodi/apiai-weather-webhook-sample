@@ -80,10 +80,12 @@ def processRequest(req):
         parameter = context[0].get('parameters')
         issue = parameter.get('issueid')
         print("Issue Id: " + issue)
-        #if issue is None:
-        #    return {}
-        #issueid = int(issue)
-        issueid = math.floor(issue)
+        if issue is None:
+            return {}
+        try:
+            issueid = int(issue)
+        except ValueError:
+            print("Oops!  That was no valid number.  Try again...")
         yql_url = baseurl + issueid + addQuery + "&format=json"
         print(yql_url)
         result = urlopen(yql_url).read()
