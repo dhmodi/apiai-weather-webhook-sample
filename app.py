@@ -81,7 +81,7 @@ def processRequest(req):
         print("Issue Id: " + issue)
         if issue is None:
             return {}
-        issueid = int(issue)
+        #issueid = int(issue)
         yql_url = baseurl + issueid + addQuery + "&format=json"
         print(yql_url)
         result = urlopen(yql_url).read()
