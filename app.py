@@ -83,7 +83,7 @@ def processRequest(req):
             print("Issue Id: " + issue)
             if issue is None:
                 return {}
-            issueid = int(issue.strip('"'))
+            issueid = issue.strip('.0')
         except ValueError:
             print("Oops!  That was no valid number.  Try again...")
         except Exception:
