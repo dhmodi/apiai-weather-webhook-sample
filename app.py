@@ -78,12 +78,12 @@ def processRequest(req):
         result = req.get("result")
         context = result.get("contexts")
         parameter = context[0].get('parameters')
-        issue = parameter.get('issueid')
+        issue = parameter.get('issue')
         print("Issue Id: " + issue)
         if issue is None:
             return {}
         try:
-            issueid = int(issue)
+            issueid = int(issue.string())
         except ValueError:
             print("Oops!  That was no valid number.  Try again...")
         yql_url = baseurl + issueid + addQuery + "&format=json"
