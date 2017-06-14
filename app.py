@@ -79,11 +79,11 @@ def processRequest(req):
         context = result.get("contexts")
         parameter = context[0].get('parameters')
         try:
-            issue = parameter.get('issue')
+            issue = parameter.get('issueid')
             print("Issue Id: " + issue)
-            #if issue is None:
-            #    return {}
-            issueid = int(issue)
+            if issue is None:
+                return {}
+            issueid = int(issue.strip('"'))
         except ValueError:
             print("Oops!  That was no valid number.  Try again...")
         except Exception:
