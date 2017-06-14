@@ -311,7 +311,7 @@ def makeWebhookDiagnosisResult(data):
         return {}
     print(issue)
     name = result['Issue']['Name']
-    id = name = result['Issue']['ID']
+    id = result['Issue']['ID']
     if name is None:
         return {}
 
