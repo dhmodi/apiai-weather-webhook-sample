@@ -28,6 +28,16 @@
 			$("#event").click(function(event) {
 
 	newEntry();
+		$.ajax({
+				type: "POST",
+				url: baseUrl + "contexts?sessionId=241187",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				headers: {
+					"Authorization": "Bearer " + accessToken
+				},
+				data: JSON.stringify([{ 'name': 'medication-followup', 'lifespan': 5 }]),
+			});
 	$.ajax({
 				type: "POST",
 				url: baseUrl + "query?v=20150910",
@@ -36,7 +46,7 @@
 				headers: {
 					"Authorization": "Bearer " + accessToken
 				},
-				data: JSON.stringify({ 'event': { 'name': 'prescription_event', 'data': { 'doctor': 'DrSAM', 'disease': 'Cold', 'medicine': 'CROCINCOLD&FLUMAXTABLETS', 'days': '20' } }, 'timezone': 'America/New_York', 'lang': 'en', 'sessionId': '241187', 'resetContexts': true, "contexts": [{ "name": "medication-followup", "lifespan": 5 }] }),
+				data: JSON.stringify({ 'event': { 'name': 'prescription_event', 'data': { 'doctor': 'DrSAM', 'disease': 'Cold', 'medicine': 'CROCINCOLD&FLUMAXTABLETS', 'days': '20' } }, 'timezone': 'America/New_York', 'lang': 'en', 'sessionId': '241187'}),
 
 				success: function(data) {
 						setResponse(JSON.stringify(data, undefined, 2));
