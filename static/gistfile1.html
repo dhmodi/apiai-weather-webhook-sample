@@ -36,7 +36,7 @@
 				headers: {
 					"Authorization": "Bearer " + accessToken
 				},
-				data: JSON.stringify({ 'event': { 'name': 'prescription_event', 'data': { 'doctor': 'DrSAM', 'disease': 'Cold', 'medicine': 'CROCINCOLD&FLUMAXTABLETS', 'days': '20' } }, 'timezone': 'America/New_York', 'lang': 'en', 'sessionId': '1321321', 'resetContexts': true, "contexts": [{ "name": "medication-followup", "lifespan": 5 }] }),
+				data: JSON.stringify({ 'event': { 'name': 'prescription_event', 'data': { 'doctor': 'DrSAM', 'disease': 'Cold', 'medicine': 'CROCINCOLD&FLUMAXTABLETS', 'days': '20' } }, 'timezone': 'America/New_York', 'lang': 'en', 'sessionId': '241187', 'resetContexts': true, "contexts": [{ "name": "medication-followup", "lifespan": 5 }] }),
 
 				success: function(data) {
 						setResponse(JSON.stringify(data, undefined, 2));
@@ -111,7 +111,7 @@
 				headers: {
 					"Authorization": "Bearer " + accessToken
 				},
-				data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
+				data: JSON.stringify({ query: text, lang: "en", sessionId: "241187" }),
 
 				success: function(data) {
 						setResponse(JSON.stringify(data, undefined, 2));
