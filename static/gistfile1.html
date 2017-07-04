@@ -25,7 +25,7 @@
 			$("#rec").click(function(event) {
 				switchRecognition();
 			});
-			$("#event").click(function(event) {
+<!-- 			$("#event").click(function(event) {
 
 	newEntry();
 		$.ajax({
@@ -57,7 +57,7 @@
 					setResponse("Internal Server Error");
 				}
 			});
-			});
+			}); -->
 		});
 
 		var recognition;
@@ -143,10 +143,8 @@
 			<!-- $("#response").text(val); -->
 			if (val.result) {
                 var say=""; 
-                say = val.result.fulfillment.messages;
-				for (var j = 0; j < say.length; j++)
-				{
-				botMessage = say[j].speech;
+                say = val.result.fulfillment.speech;
+				botMessage = say
 				messages.push("<b>" + botName + ":</b> " + botMessage);
 			   for (var i = 1; i < 11; i++) {
       if (messages[messages.length - i])
@@ -157,7 +155,6 @@
                 //utterThis.lang = "en-US";
                 synth.speak(utterThis);
             }
-			}
 		}
   //this runs each time enter is pressed.
 //It controls the overall input and output
@@ -284,9 +281,8 @@ h1 {
     <p id="chatlog1" class="chatlog">&nbsp;</p>
     <input type="text" name="chat" id="chatbox" placeholder="Hi there! Type or Speak here to talk to me."><button id="rec"></button>
 	
-
+	
   </div>
-  <button id="event">Use Case 2</button>
 <!--	<div>
 		 <input id="input" type="text"> <button id="rec">Speak</button> 
 		 <br>Response<br> <textarea id="response" cols="40" rows="20"></textarea>	
