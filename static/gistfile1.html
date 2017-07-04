@@ -153,12 +153,11 @@
 			   for (var i = 1; i < 11; i++) {
       if (messages[messages.length - i])
         $("#chatlog" + i).html(messages[messages.length - i]);
-		
+		}
                 synth = window.speechSynthesis;
                 var utterThis = new SpeechSynthesisUtterance(botMessage);
                 //utterThis.lang = "en-US";
                 synth.speak(utterThis);
-				}
             }
 			}
 		}
