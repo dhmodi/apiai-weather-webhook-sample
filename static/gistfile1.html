@@ -25,6 +25,39 @@
 			$("#rec").click(function(event) {
 				switchRecognition();
 			});
+			$("#event").click(function(event) {
+
+	newEntry();
+		$.ajax({
+				type: "POST",
+				url: baseUrl + "contexts?sessionId=241187",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				headers: {
+					"Authorization": "Bearer " + accessToken
+				},
+				data: JSON.stringify([{ name: 'medication-followup', lifespan: 5 }]),
+			});
+	$.ajax({
+				type: "POST",
+				url: baseUrl + "query?v=20150910",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				headers: {
+					"Authorization": "Bearer " + accessToken
+				},
+				data: JSON.stringify({ event: { name: 'prescription_event', data: { 'doctor': 'Dr SAM', disease: 'Cold', medicine: 'CROCIN COLD & FLUMAX TABLETS', days: '20' } }, timezone: 'America/New_York', lang: 'en', sessionId: '241187'}),
+
+				success: function(data) {
+						setResponse(JSON.stringify(data, undefined, 2));
+					setAudioResponse(data);
+					
+				},
+				error: function() {
+					setResponse("Internal Server Error");
+				}
+			});
+			});
 		});
 
 		var recognition;
@@ -88,7 +121,7 @@
 				headers: {
 					"Authorization": "Bearer " + accessToken
 				},
-				data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
+				data: JSON.stringify({ query: text, lang: "en", sessionId: "241187" }),
 
 				success: function(data) {
 						setResponse(JSON.stringify(data, undefined, 2));
@@ -110,8 +143,10 @@
 			<!-- $("#response").text(val); -->
 			if (val.result) {
                 var say=""; 
-                say = val.result.fulfillment.speech;
-				botMessage = say
+                say = val.result.fulfillment.messages;
+				for (var j = 0; j < say.length; j++)
+				{
+				botMessage = say[j].speech;
 				messages.push("<b>" + botName + ":</b> " + botMessage);
 			   for (var i = 1; i < 11; i++) {
       if (messages[messages.length - i])
@@ -122,6 +157,7 @@
                 //utterThis.lang = "en-US";
                 synth.speak(utterThis);
             }
+			}
 		}
   //this runs each time enter is pressed.
 //It controls the overall input and output
@@ -248,8 +284,9 @@ h1 {
     <p id="chatlog1" class="chatlog">&nbsp;</p>
     <input type="text" name="chat" id="chatbox" placeholder="Hi there! Type or Speak here to talk to me."><button id="rec"></button>
 	
-	
+
   </div>
+  <button id="event">Use Case 2</button>
 <!--	<div>
 		 <input id="input" type="text"> <button id="rec">Speak</button> 
 		 <br>Response<br> <textarea id="response" cols="40" rows="20"></textarea>	
