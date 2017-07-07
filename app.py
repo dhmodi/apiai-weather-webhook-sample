@@ -205,11 +205,10 @@ def makeSymptomsQuery(req):
     symptoms = parameters.get("symptoms")
     #print(json.dumps(parameters))
     #print(json.dumps(symptoms))
-    if symptoms is None:
+	if symptoms is None:
         return None
-
     list = ",".join(symptoms)
-	print list
+    print list
     return "symptoms=[" + list + "]"
 
 def makeDoctorQuery(req):
