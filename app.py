@@ -208,12 +208,8 @@ def makeSymptomsQuery(req):
     if symptoms is None:
         return None
 
-    list = ""
-    for a in symptoms:
-        list = list + a
-        list = list + ","
-
-    #print(list)
+    list = ",".join(symptoms)
+	print list
     return "symptoms=[" + list + "]"
 
 def makeDoctorQuery(req):
