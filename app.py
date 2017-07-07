@@ -98,6 +98,30 @@ def processRequest(req):
         res = makeWebhookInfoResult(data)
         return res
 
+    elif req.get("result").get("action") == "identify.symptoms":
+        baseurl = "https://healthservice.priaid.ch/issues/"
+        addQuery = "/info?token=" + apimedic_key + "&language=en-gb&&format=json"
+        result = req.get("result")
+        context = result.get("contexts")
+        parameter = context[0].get('parameters')
+        try:
+            issue = parameter.get('issueid')
+            print("Issue Id: " + issue)
+            if issue is None:
+                return {}
+            issueid = issue.split('.')[0]
+        except ValueError:
+            print("Oops!  That was no valid number.  Try again...")
+        except Exception:
+            print("Exception occurred...")
+        yql_url = baseurl + issueid + addQuery
+        print(yql_url)
+        result = urlopen(yql_url).read()
+        #print(json.dumps(result))
+        data = json.loads(result)
+        res = makeWebhookDiseaseResult(data)
+        return res
+
     elif (req.get("result").get("action") == "identify.disease"):
         baseurl = "https://healthservice.priaid.ch/diagnosis?token=" + apimedic_key + "&gender=male&language=en-gb&year_of_birth=1988&"
         yql_query = makeSymptomsQuery(req)
@@ -384,6 +408,36 @@ def makeWebhookInfoResult(data):
         #"contextOut": [{"name":"identifydisease-followup", "lifespan":5, "parameters":{"issue":id}}],
         "source": "virtual-patient-assistant"
     }
+
+def makeWebhookDiseaseResult(data):
+    description = data['PossibleSymptoms']
+    if description is None:
+        return {}
+    #print(description)
+    #name = result['Issue']['Name']
+    #id = result['Issue']['ID']
+    #if name is None:
+    # return {}
+
+    #diagnosis = result['Issue']['IcdName']
+    #if diagnosis is None:
+    #    return {}
+
+    # print(json.dumps(item, indent=4))
+
+    speech = "Probable symptoms are " + description
+
+    #print("Response:")
+    #print(description)
+
+    return {
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        #"contextOut": [{"name":"identifydisease-followup", "lifespan":5, "parameters":{"issue":id}}],
+        "source": "virtual-patient-assistant"
+    }
+
 
 def makeWebhookDoctorResult(data):
     result = data.get('data')
