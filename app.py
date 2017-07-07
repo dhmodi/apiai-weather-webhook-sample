@@ -207,7 +207,6 @@ def makeSymptomsQuery(req):
     #print(json.dumps(symptoms))
     if symptoms is None:
         return None
-
     list = ",".join(symptoms)
 	print list
     return "symptoms=[" + list + "]"
