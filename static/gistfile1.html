@@ -3,12 +3,14 @@
     <title>Virtual Patient Assistant</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
     <script type="text/javascript" src="assets/js/functions.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <script type="text/javascript">
 		$(document).ready(function() {
 		    loadVoices();
+		    window.speechSynthesis.onvoiceschanged = function() {
+                loadVoices();
+            };
 			$("#chatbox").keypress(function(event) {
 				if (event.which == 13) {
 					event.preventDefault();
@@ -57,8 +59,8 @@
 </head>
 <body>
 <div id='bodybox'>
-    <h1> Ask the Doctor - Your Personal Assistant</h1>
-    <select id="voiceSelect"></select>
+    <h1> Ask the Doctor - Your Personal Assistant</h1><br/>
+    <b>Select Voice: </b><select id="voiceSelect"></select>
     <div id='chatborder'>
         <p id="chatlog11" class="chatlog">&nbsp;</p>
         <p id="chatlog10" class="chatlog">&nbsp;</p>

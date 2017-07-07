@@ -1,20 +1,18 @@
 function loadVoices() {
 	// Fetch the available voices.
-	var voices = window.speechSynthesis.getVoices();
-
+	var voices = speechSynthesis.getVoices();
+console.log(voices);
 	// Loop through each of the voices.
 	voices.forEach(function (voice, i) {
 		// Create a new option element.
-		console.log(voices);
-
-		var option = document.createElement('option');
-
-		// Set the options value and text.
-		option.value = voice.name;
-		option.innerHTML = voice.name;
-		// Add the option to the voice selector.
-		$("#voiceSelect").appendChild(option);
-	});
+		console.log(voice);
+		if(voice.lang == 'en-US' || voice.lang == 'en-GB'){
+        $('#voiceSelect').append($('<option>', {
+                value: voice.lang,
+                text : voice.name
+            }));
+            }
+        });
 }
 
 var recognition;
@@ -123,9 +121,9 @@ function setAudioResponse(val) {
 			}
 			synth = window.speechSynthesis;
 			var utterThis = new SpeechSynthesisUtterance(botMessage);
-			utterThis.lang = "en-US";
+			utterThis.lang = $("#voiceSelect option:selected").val();
 			// utterThis.lang = "hi-IN";
-			utterThis.name = "Google US English";
+			utterThis.name = $("#voiceSelect option:selected").text();
 			synth.speak(utterThis);
 		}
 	}
