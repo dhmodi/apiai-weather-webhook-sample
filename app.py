@@ -52,29 +52,29 @@ def webhook():
 
 
 def processRequest(req):
-    if req.get("result").get("action") == "weather":
-        baseurl = "https://query.yahooapis.com/v1/public/yql?"
-        yql_query = makeYqlQuery(req)
-        if yql_query is None:
-            return {}
-        yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
-        result = urlopen(yql_url).read()
-        data = json.loads(result)
-        res = makeWebhookWeatherResult(data)
-        return res
+    # if req.get("result").get("action") == "weather":
+    #     baseurl = "https://query.yahooapis.com/v1/public/yql?"
+    #     yql_query = makeYqlQuery(req)
+    #     if yql_query is None:
+    #         return {}
+    #     yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
+    #     result = urlopen(yql_url).read()
+    #     data = json.loads(result)
+    #     res = makeWebhookWeatherResult(data)
+    #     return res
+    #
+    # elif req.get("result").get("action") == "weather.temperature":
+    #     baseurl = "https://query.yahooapis.com/v1/public/yql?"
+    #     yql_query = makeYqlQuery(req)
+    #     if yql_query is None:
+    #         return {}
+    #     yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
+    #     result = urlopen(yql_url).read()
+    #     data = json.loads(result)
+    #     res = makeWebhookTemperatureResult(data)
+    #     return res
 
-    elif req.get("result").get("action") == "weather.temperature":
-        baseurl = "https://query.yahooapis.com/v1/public/yql?"
-        yql_query = makeYqlQuery(req)
-        if yql_query is None:
-            return {}
-        yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
-        result = urlopen(yql_url).read()
-        data = json.loads(result)
-        res = makeWebhookTemperatureResult(data)
-        return res
-
-    elif req.get("result").get("action") == "IdentifyDisease.info":
+    if req.get("result").get("action") == "IdentifyDisease.info":
         baseurl = "https://healthservice.priaid.ch/issues/"
         addQuery = "/info?token=" + apimedic_key + "&language=en-gb&&format=json"
         result = req.get("result")
@@ -98,7 +98,7 @@ def processRequest(req):
         res = makeWebhookInfoResult(data)
         return res
 
-    elif req.get("result").get("action") == "identify.disease":
+    elif (req.get("result").get("action") == "identify.disease"):
         baseurl = "https://healthservice.priaid.ch/diagnosis?token=" + apimedic_key + "&gender=male&language=en-gb&year_of_birth=1988&"
         yql_query = makeSymptomsQuery(req)
         #print(yql_query)
@@ -205,10 +205,10 @@ def makeSymptomsQuery(req):
     symptoms = parameters.get("symptoms")
     #print(json.dumps(parameters))
     #print(json.dumps(symptoms))
-	if symptoms is None:
+    if symptoms is None:
         return None
     list = ",".join(symptoms)
-    print list
+    print (list)
     return "symptoms=[" + list + "]"
 
 def makeDoctorQuery(req):
