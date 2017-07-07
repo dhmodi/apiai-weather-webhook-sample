@@ -32,7 +32,7 @@ def index():
 
 @app.route('/speech')
 def speech():
-    return redirect(url_for('static', filename='gistfile1.html'))
+    return redirect(url_for('static', filename='speech.html'))
 
 
 @app.route('/webhook', methods=['POST'])
