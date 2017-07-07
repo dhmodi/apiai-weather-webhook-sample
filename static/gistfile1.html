@@ -2,17 +2,16 @@
 <head>
 	<title>Virtual Patient Assistant</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<script type="text/javascript">
 		nlp = window.nlp_compromise;
-
 		var accessToken = "872500f5983f46568df07d5ab0305eed";
 		var baseUrl = "https://api.api.ai/v1/";
 		var messages = [], //array that hold the record of each string in chat
   lastUserMessage = "", //keeps track of the most recent input string from the user
   botMessage = "", //var keeps track of what the chatbot is going to say
   botName = 'Dr. Who'; //name of the chatbot
- 
 
 		$(document).ready(function() {
 			$("#chatbox").keypress(function(event) {
@@ -106,7 +105,7 @@
 
 		function updateRec() {
 			// $("#rec").text(recognition ? "Stop" : "Speak");
-			image_url = (recognition ? "microphone-309680_960_720.png" : "microphone-2104091_960_720.png" )
+			image_url = (recognition ? "assets/image/microphone-309680_960_720.png" : "assets/image/microphone-2104091_960_720.png" )
 			$("#rec").css('background-image', 'url(' + image_url + ')');
 		}
 
@@ -157,6 +156,7 @@
                 synth = window.speechSynthesis;
                 var utterThis = new SpeechSynthesisUtterance(botMessage);
                 utterThis.lang = "en-US";
+                // utterThis.lang = "hi-IN";
                 utterThis.name = "Google US English";
                 synth.speak(utterThis);
             }
@@ -193,87 +193,33 @@ function newEntry() {
 $("#chatbox").focus(function () {
 $(this).attr("placeholder", "");
 });
+
+// Get the voice select element.
+var voiceSelect = document.getElementById('voiceSelect');
+
+function loadVoices() {
+  // Fetch the available voices.
+	var voices = speechSynthesis.getVoices();
+
+  // Loop through each of the voices.
+	voices.forEach(function(voice, i) {
+    // Create a new option element.
+		var option = document.createElement('option');
+
+    // Set the options value and text.
+		option.value = voice.name;
+		option.innerHTML = voice.name;
+
+    // Add the option to the voice selector.
+		voiceSelect.appendChild(option);
+	});
+}
 	</script>
-	<style type="text/css">
-		body {
-  font: 15px arial, sans-serif;
-  background-color: #d9d9d9;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  background-image: url("904.jpg");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-
-#bodybox {
-  margin: auto;
-  max-width: 550px;
-  font: 15px arial, sans-serif;
-  background-color: white;
-  border-style: solid;
-  border-width: 1px;
-  padding-top: 20px;
-  padding-bottom: 25px;
-  padding-right: 25px;
-  padding-left: 25px;
-  box-shadow: 5px 5px 5px grey;
-  border-radius: 15px;
-  margin-left: 600px;
-}
-
-#chatborder {
-  border-style: solid;
-  background-color: #f6f9f6;
-  border-width: 3px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
-  padding-top: 10px;
-  padding-bottom: 15px;
-  padding-right: 20px;
-  padding-left: 15px;
-  border-radius: 15px;
-}
-
-.chatlog {
-   font: 15px arial, sans-serif;
-}
-
-#chatbox {
-  font: 17px arial, sans-serif;
-  height: 30px;
-  width: 90%;
-  margin-right: 10px;
-}
-
-h1 {
-  margin: auto;
-}
-
-pre {
-  background-color: #f0f0f0;
-  margin-left: 20px;
-}
-
-#rec {
-    position: absolute;
-    background:url("microphone-2104091_960_720.png");
-	background-size: 100% 100%;
-    background-repeat: no-repeat;
-    width:40px;
-    height:40px;
-	border-style: none;
-	margin: auto;
-}
-h1 {
-    text-align: center;
-}
-	</style>
 </head>
-<body>
+<body  onload="loadVoices();">
 <div id='bodybox'>
 <h1> Ask the Doctor - Your Personal Assistant</h1>
+<select id="voiceSelect"></select>
   <div id='chatborder'>
    <p id="chatlog11" class="chatlog">&nbsp;</p>
     <p id="chatlog10" class="chatlog">&nbsp;</p>
@@ -296,5 +242,6 @@ h1 {
 		 <br>Response<br> <textarea id="response" cols="40" rows="20"></textarea>	
 		
 	</div>-->
+</div>
 </body>
 </html>
