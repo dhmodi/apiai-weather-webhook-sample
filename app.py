@@ -360,7 +360,7 @@ def makeWebhookInfoResult(data):
     description = data['Description']
     if description is None:
         return {}
-    print(description)
+    #print(description)
     #name = result['Issue']['Name']
     #id = result['Issue']['ID']
     #if name is None:
@@ -374,8 +374,8 @@ def makeWebhookInfoResult(data):
 
     #speech = "You might be experiencing " + name + ". These are signs of " + diagnosis
 
-    print("Response:")
-    print(description)
+    #print("Response:")
+    #print(description)
 
     return {
         "speech": description,
