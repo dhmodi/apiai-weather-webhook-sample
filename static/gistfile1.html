@@ -156,7 +156,8 @@
 		}
                 synth = window.speechSynthesis;
                 var utterThis = new SpeechSynthesisUtterance(botMessage);
-                //utterThis.lang = "en-US";
+                utterThis.lang = "en-US";
+                utterThis.name = "Google US English";
                 synth.speak(utterThis);
             }
 			}
