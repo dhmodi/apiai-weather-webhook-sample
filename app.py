@@ -18,8 +18,7 @@ from flask import request
 from flask import make_response
 from flask import url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
-import sqlite3 as sql
-
+import psycopg2
 
 
 import apiai
@@ -28,6 +27,17 @@ import apiai
 app = Flask(__name__)
 
 apimedic_key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRobW9kaUBkZWxvaXR0ZS5jb20iLCJyb2xlIjoiVXNlciIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjI5MSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvdmVyc2lvbiI6Ijk5IiwiaHR0cDovL2V4YW1wbGUub3JnL2NsYWltcy9saW1pdCI6Ijk5OTk5OTk5OSIsImh0dHA6Ly9leGFtcGxlLm9yZy9jbGFpbXMvbWVtYmVyc2hpcCI6IkJhc2ljIiwiaHR0cDovL2V4YW1wbGUub3JnL2NsYWltcy9sYW5ndWFnZSI6ImVuLWdiIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9leHBpcmF0aW9uIjoiMjA5OS0xMi0zMSIsImh0dHA6Ly9leGFtcGxlLm9yZy9jbGFpbXMvbWVtYmVyc2hpcHN0YXJ0IjoiMjAwMC0wMS0wMSIsImlzcyI6Imh0dHBzOi8vYXV0aHNlcnZpY2UucHJpYWlkLmNoIiwiYXVkIjoiaHR0cHM6Ly9oZWFsdGhzZXJ2aWNlLnByaWFpZC5jaCIsImV4cCI6MTQ5OTk0NDkxMCwibmJmIjoxNDk5OTM3NzEwfQ.jywFlj5nSM6VQLj3i9F0N1holu3g8shXt9YwCLkSwNk"
+
+urlparse.uses_netloc.append("postgres")
+url = urlparse.urlparse("postgres://caedtehsggslri:4679ba0abec57484a1d7ed261b74e80b08391993433c77c838c58415087a9c34@ec2-107-20-255-96.compute-1.amazonaws.com:5432/d5tmi1ihm5f6hv")
+
+conn = psycopg2.connect(
+    database=url.path[1:],
+    user=url.username,
+    password=url.password,
+    host=url.hostname,
+    port=url.port
+)
 
 @app.route('/')
 def index():
@@ -173,16 +183,14 @@ def processRequest(req):
             res = makeWebhookDoctorResult(data)
             return  res
         elif req.get("result").get("action") == "employee.information":
-            con = sql.connect("employee.db")
-            con.row_factory = sql.Row
-
+            # con = sql.connect("employee.db")
             result = req.get("result")
             parameters = result.get("parameters")
             table = parameters.get("tables")
             attribute = parameters.get("attibute")
             operation = parameters.get("operation")
             if ((attribute[0] is not None) and (attribute[0] == "count")):
-                cur = con.cursor()
+                cur = conn.cursor()
                 cur.execute("select count(*) from " + table[0])
                 rows = cur.fetchall()
                 outText = "There are " + rows[0] + " number of " + table[0] + "/s"
