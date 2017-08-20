@@ -17,6 +17,10 @@ from flask import Flask
 from flask import request
 from flask import make_response
 from flask import url_for, redirect
+from flask_sqlalchemy import SQLAlchemy
+import sqlite3 as sql
+
+
 
 import apiai
 
@@ -24,6 +28,21 @@ import apiai
 app = Flask(__name__)
 
 apimedic_key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRobW9kaUBkZWxvaXR0ZS5jb20iLCJyb2xlIjoiVXNlciIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjI5MSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvdmVyc2lvbiI6Ijk5IiwiaHR0cDovL2V4YW1wbGUub3JnL2NsYWltcy9saW1pdCI6Ijk5OTk5OTk5OSIsImh0dHA6Ly9leGFtcGxlLm9yZy9jbGFpbXMvbWVtYmVyc2hpcCI6IkJhc2ljIiwiaHR0cDovL2V4YW1wbGUub3JnL2NsYWltcy9sYW5ndWFnZSI6ImVuLWdiIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9leHBpcmF0aW9uIjoiMjA5OS0xMi0zMSIsImh0dHA6Ly9leGFtcGxlLm9yZy9jbGFpbXMvbWVtYmVyc2hpcHN0YXJ0IjoiMjAwMC0wMS0wMSIsImlzcyI6Imh0dHBzOi8vYXV0aHNlcnZpY2UucHJpYWlkLmNoIiwiYXVkIjoiaHR0cHM6Ly9oZWFsdGhzZXJ2aWNlLnByaWFpZC5jaCIsImV4cCI6MTQ5OTk0NDkxMCwibmJmIjoxNDk5OTM3NzEwfQ.jywFlj5nSM6VQLj3i9F0N1holu3g8shXt9YwCLkSwNk"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+
+db = SQLAlchemy(app)
+class embployee(db.Model):
+    employee_id = db.Column('employee_id', db.String(100), primary_key = True)
+    employee_name = db.Column(db.String(100))
+    service_line = db.Column(db.String(50))
+    country = db.Column(db.String(200))
+    salary = db.Column(db.Integer)
+
+    def __init__(self, employee_name, service_line, country,salary):
+        self.employee_name = employee_name
+        self.service_line = service_line
+        self.country = country
+        self.salary = salary
 
 @app.route('/')
 def index():
@@ -168,6 +187,27 @@ def processRequest(req):
             data = json.loads(result)
             res = makeWebhookDoctorResult(data)
             return  res
+        elif req.get("result").get("action") == "employee.information":
+            con = sql.connect("employee.db")
+            con.row_factory = sql.Row
+
+            result = req.get("result")
+            parameters = result.get("parameters")
+            table = parameters.get("tables")
+            attribute = parameters.get("attibute")
+            operation = parameters.get("operation")
+            if ((attribute[0] is not None) and (attribute[0] == "count")):
+                cur = con.cursor()
+                cur.execute("select count(*) from " + table[0])
+                rows = cur.fetchall()
+                outText = "There are " + rows[0] + " number of " + table[0] + "/s"
+                return {
+                    "speech": outText,
+                    "displayText": outText,
+                    # "data": data,
+                    # "contextOut": [],
+                    "source": "Dhaval"
+                }
         else:
             googleurl = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCQiBWiGy-aaNrthZCShG8sOs3G_ynJkEI&"
             q = urlencode({'address': city})
@@ -479,6 +519,7 @@ def makeWebhookDoctorResult(data):
     }
 
 if __name__ == '__main__':
+    db.create_all()
     port = int(os.getenv('PORT', 5000))
 
     print("Starting app on port %d" % port)
