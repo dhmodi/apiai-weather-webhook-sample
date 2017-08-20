@@ -182,9 +182,11 @@ def processRequest(req):
             return  res
         elif req.get("result").get("action") == "employee.information":
             # con = sql.connect("employee.db")
+            print("Employee Information")
             result = req.get("result")
             parameters = result.get("parameters")
             table = parameters.get("tables")
+            print(table)
             attribute = parameters.get("attibute")
             operation = parameters.get("operation")
             if ((attribute[0] is not None) and (attribute[0] == "count")):
