@@ -28,21 +28,6 @@ import apiai
 app = Flask(__name__)
 
 apimedic_key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRobW9kaUBkZWxvaXR0ZS5jb20iLCJyb2xlIjoiVXNlciIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjI5MSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvdmVyc2lvbiI6Ijk5IiwiaHR0cDovL2V4YW1wbGUub3JnL2NsYWltcy9saW1pdCI6Ijk5OTk5OTk5OSIsImh0dHA6Ly9leGFtcGxlLm9yZy9jbGFpbXMvbWVtYmVyc2hpcCI6IkJhc2ljIiwiaHR0cDovL2V4YW1wbGUub3JnL2NsYWltcy9sYW5ndWFnZSI6ImVuLWdiIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9leHBpcmF0aW9uIjoiMjA5OS0xMi0zMSIsImh0dHA6Ly9leGFtcGxlLm9yZy9jbGFpbXMvbWVtYmVyc2hpcHN0YXJ0IjoiMjAwMC0wMS0wMSIsImlzcyI6Imh0dHBzOi8vYXV0aHNlcnZpY2UucHJpYWlkLmNoIiwiYXVkIjoiaHR0cHM6Ly9oZWFsdGhzZXJ2aWNlLnByaWFpZC5jaCIsImV4cCI6MTQ5OTk0NDkxMCwibmJmIjoxNDk5OTM3NzEwfQ.jywFlj5nSM6VQLj3i9F0N1holu3g8shXt9YwCLkSwNk"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
-
-db = SQLAlchemy(app)
-class embployee(db.Model):
-    employee_id = db.Column('employee_id', db.String(100), primary_key = True)
-    employee_name = db.Column(db.String(100))
-    service_line = db.Column(db.String(50))
-    country = db.Column(db.String(200))
-    salary = db.Column(db.Integer)
-
-    def __init__(self, employee_name, service_line, country,salary):
-        self.employee_name = employee_name
-        self.service_line = service_line
-        self.country = country
-        self.salary = salary
 
 @app.route('/')
 def index():
@@ -519,7 +504,6 @@ def makeWebhookDoctorResult(data):
     }
 
 if __name__ == '__main__':
-    db.create_all()
     port = int(os.getenv('PORT', 5000))
 
     print("Starting app on port %d" % port)
