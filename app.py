@@ -17,7 +17,6 @@ from flask import Flask
 from flask import request
 from flask import make_response
 from flask import url_for, redirect
-from flask_sqlalchemy import SQLAlchemy
 import psycopg2
 
 
