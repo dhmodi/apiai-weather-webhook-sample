@@ -64,28 +64,7 @@ def webhook():
 
 
 def processRequest(req):
-    # if req.get("result").get("action") == "weather":
-    #     baseurl = "https://query.yahooapis.com/v1/public/yql?"
-    #     yql_query = makeYqlQuery(req)
-    #     if yql_query is None:
-    #         return {}
-    #     yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
-    #     result = urlopen(yql_url).read()
-    #     data = json.loads(result)
-    #     res = makeWebhookWeatherResult(data)
-    #     return res
-    #
-    # elif req.get("result").get("action") == "weather.temperature":
-    #     baseurl = "https://query.yahooapis.com/v1/public/yql?"
-    #     yql_query = makeYqlQuery(req)
-    #     if yql_query is None:
-    #         return {}
-    #     yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
-    #     result = urlopen(yql_url).read()
-    #     data = json.loads(result)
-    #     res = makeWebhookTemperatureResult(data)
-    #     return res
-
+    print(req.get("result").get("action"))
     if req.get("result").get("action") == "IdentifyDisease.info":
         baseurl = "https://healthservice.priaid.ch/issues/"
         addQuery = "/info?token=" + apimedic_key + "&language=en-gb&&format=json"
@@ -171,7 +150,7 @@ def processRequest(req):
                     "displayText": "Please provide either symptom or location for the search",
                     # "data": data,
                     # "contextOut": [],
-                    "source": "apiai-weather-webhook-sample"
+                    "source": "Dhaval"
                 }
             yql_url = baseurl + urlencode({'query': json.dumps(symptoms)})
             print(yql_url)
@@ -180,28 +159,8 @@ def processRequest(req):
             data = json.loads(result)
             res = makeWebhookDoctorResult(data)
             return  res
-        elif req.get("result").get("action") == "employee.information":
-            # con = sql.connect("employee.db")
-            print("Employee Information")
-            result = req.get("result")
-            parameters = result.get("parameters")
-            table = parameters.get("tables")
-            print(table)
-            attribute = parameters.get("attibute")
-            operation = parameters.get("operation")
-            if ((attribute[0] is not None) and (attribute[0] == "count")):
-                cur = conn.cursor()
-                cur.execute("select count(*) from " + table[0])
-                rows = cur.fetchall()
-                outText = "There are " + rows[0] + " number of " + table[0] + "/s"
-                return {
-                    "speech": outText,
-                    "displayText": outText,
-                    # "data": data,
-                    # "contextOut": [],
-                    "source": "Dhaval"
-                }
         else:
+            print("In Else Condition")
             googleurl = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCQiBWiGy-aaNrthZCShG8sOs3G_ynJkEI&"
             q = urlencode({'address': city})
             yql_url = googleurl + q
@@ -241,7 +200,27 @@ def processRequest(req):
             data = json.loads(result)
             res = makeWebhookDoctorResult(data)
             return res
-
+    elif (req.get("result").get("action") == "employee.information"):
+        print("Employee Information")
+        parameters = req.get("result").get("parameters")
+        table = parameters.get("tables")
+        print(table)
+        attribute = parameters.get("attribute")
+        operation = parameters.get("operation")
+        print(operation)
+        if ((operation[0] is not None) and (operation[0] == "count")):
+            cur = conn.cursor()
+            cur.execute("select count(*) from " + table[0])
+            rows = cur.fetchall()
+            print(rows[0])
+            outText = "There are " + str(rows[0][0]) + " number of " + str(table[0]) + "s"
+            return {
+                "speech": outText,
+                "displayText": outText,
+                # "data": data,
+                # "contextOut": [],
+                "source": "Dhaval"
+            }
 
 def makeYqlQuery(req):
     result = req.get("result")
@@ -299,13 +278,10 @@ def makeDoctorQuery(req):
         print(json.dumps(longitude))
         return urlencode({'query': json.dumps(symptoms), 'location': latitude + "," + longitude})
 
-
-
 def makeWebhookWeatherResult(data):
     query = data.get('query')
     if query is None:
         return {}
-
     result = query.get('results')
     if result is None:
         return {}
