@@ -23,11 +23,11 @@ from flask import url_for, redirect
 import psycopg2
 
 
-from .cognitiveSQL.Database import Database
-from .cognitiveSQL.LangConfig import LangConfig
-from cognitiveSQL.Parser import Parser
-from cognitiveSQL.Thesaurus import Thesaurus
-from cognitiveSQL.StopwordFilter import StopwordFilter
+import cognitiveSQL.Database as Database
+import cognitiveSQL.LangConfig as LangConfig
+import cognitiveSQL.Parser as Parser
+import cognitiveSQL.Thesaurus as Thesaurus
+import cognitiveSQL.StopwordFilter as StopwordFilter
 
 import apiai
 
@@ -517,14 +517,14 @@ def makeWebhookDoctorResult(data):
     }
 
 if __name__ == '__main__':
-    database = Database()
+    database = Database.Database()
     database.load("cognitiveSQL/database/employee.sql")
     #database.print_me()
 
-    config = LangConfig()
+    config = LangConfig.LangConfig()
     config.load("cognitiveSQL/lang/english.csv")
 
-    parser = Parser(database, config)
+    parser = Parser.Parser(database, config)
     from os import sys, path
     sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
     port = int(os.getenv('PORT', 5000))
