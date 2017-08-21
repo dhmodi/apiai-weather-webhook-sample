@@ -13,13 +13,16 @@ import json
 import os
 import math
 
+import sys
+sys.path.append('cognitiveSQL')
+
 from flask import Flask
 from flask import request
 from flask import make_response
 from flask import url_for, redirect
 import psycopg2
-from cognitiveSQL.Database import Database
-from cognitiveSQL.LangConfig import LangConfig
+from ..cognitiveSQL.Database import Database
+from ..cognitiveSQL.LangConfig import LangConfig
 from cognitiveSQL.Parser import Parser
 from cognitiveSQL.Thesaurus import Thesaurus
 from cognitiveSQL.StopwordFilter import StopwordFilter
