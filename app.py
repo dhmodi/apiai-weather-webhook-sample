@@ -18,13 +18,18 @@ from flask import request
 from flask import make_response
 from flask import url_for, redirect
 import psycopg2
+from cognitiveSQL.Database import Database
+from cognitiveSQL.LangConfig import LangConfig
+from cognitiveSQL.Parser import Parser
+from cognitiveSQL.Thesaurus import Thesaurus
+from cognitiveSQL.StopwordFilter import StopwordFilter
 
 
 import apiai
 
 # Flask app should start in global layout
 app = Flask(__name__)
-
+parser = ""
 apimedic_key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRobW9kaUBkZWxvaXR0ZS5jb20iLCJyb2xlIjoiVXNlciIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjI5MSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvdmVyc2lvbiI6Ijk5IiwiaHR0cDovL2V4YW1wbGUub3JnL2NsYWltcy9saW1pdCI6Ijk5OTk5OTk5OSIsImh0dHA6Ly9leGFtcGxlLm9yZy9jbGFpbXMvbWVtYmVyc2hpcCI6IkJhc2ljIiwiaHR0cDovL2V4YW1wbGUub3JnL2NsYWltcy9sYW5ndWFnZSI6ImVuLWdiIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9leHBpcmF0aW9uIjoiMjA5OS0xMi0zMSIsImh0dHA6Ly9leGFtcGxlLm9yZy9jbGFpbXMvbWVtYmVyc2hpcHN0YXJ0IjoiMjAwMC0wMS0wMSIsImlzcyI6Imh0dHBzOi8vYXV0aHNlcnZpY2UucHJpYWlkLmNoIiwiYXVkIjoiaHR0cHM6Ly9oZWFsdGhzZXJ2aWNlLnByaWFpZC5jaCIsImV4cCI6MTQ5OTk0NDkxMCwibmJmIjoxNDk5OTM3NzEwfQ.jywFlj5nSM6VQLj3i9F0N1holu3g8shXt9YwCLkSwNk"
 
 url = urlparse("postgres://caedtehsggslri:4679ba0abec57484a1d7ed261b74e80b08391993433c77c838c58415087a9c34@ec2-107-20-255-96.compute-1.amazonaws.com:5432/d5tmi1ihm5f6hv")
@@ -202,25 +207,45 @@ def processRequest(req):
             return res
     elif (req.get("result").get("action") == "employee.information"):
         print("Employee Information")
-        parameters = req.get("result").get("parameters")
-        table = parameters.get("tables")
-        print(table)
-        attribute = parameters.get("attribute")
-        operation = parameters.get("operation")
-        print(operation)
-        if ((operation[0] is not None) and (operation[0] == "count")):
-            cur = conn.cursor()
-            cur.execute("select count(*) from " + table[0])
-            rows = cur.fetchall()
-            print(rows[0])
-            outText = "There are " + str(rows[0][0]) + " number of " + str(table[0]) + "s"
-            return {
-                "speech": outText,
-                "displayText": outText,
-                # "data": data,
-                # "contextOut": [],
-                "source": "Dhaval"
-            }
+        # parameters = req.get("result").get("parameters")
+        # table = parameters.get("tables")
+        # print(table)
+        # attribute = parameters.get("attribute")
+        # operation = parameters.get("operation")
+        # print(operation)
+        # if ((operation[0] is not None) and (operation[0] == "count")):
+        #     cur = conn.cursor()
+        #     cur.execute("select count(*) from " + table[0])
+        #     rows = cur.fetchall()
+        #     print(rows[0])
+        #     outText = "There are " + str(rows[0][0]) + " number of " + str(table[0]) + "s"
+        #     return {
+        #         "speech": outText,
+        #         "displayText": outText,
+        #         # "data": data,
+        #         # "contextOut": [],
+        #         "source": "Dhaval"
+        #     }
+        incoming_query = req.get("result").get("resolvedQuery")
+        queries = parser.parse_sentence(incoming_query)
+        #print(query for query in queries)
+        queryString = ""
+        table = ""
+        for query in queries:
+            table = query.get_from()
+            queryString = queryString + str(query)
+        print(queryString)
+        cur = conn.cursor()
+        cur.execute(queryString)
+        rows = cur.fetchall()
+        outText = "There are " + str(rows[0][0]) + " number of " + str(table) + "s"
+        return {
+            "speech": outText,
+            "displayText": outText,
+            # "data": data,
+            # "contextOut": [],
+            "source": "Dhaval"
+        }
 
 def makeYqlQuery(req):
     result = req.get("result")
@@ -488,6 +513,15 @@ def makeWebhookDoctorResult(data):
     }
 
 if __name__ == '__main__':
+    database = Database()
+    database.load("cognitiveSQL/database/employee.sql")
+    #database.print_me()
+
+    config = LangConfig()
+    config.load("cognitiveSQL/lang/english.csv")
+
+    parser = Parser(database, config)
+
     port = int(os.getenv('PORT', 5000))
 
     print("Starting app on port %d" % port)
