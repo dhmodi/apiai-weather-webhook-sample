@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='virtual-patient',
+    name='cognitiveSQL',
     packages=['cognitiveSQL'],
     include_package_data=True,
     install_requires=[
