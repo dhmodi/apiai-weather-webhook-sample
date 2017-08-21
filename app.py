@@ -521,7 +521,8 @@ if __name__ == '__main__':
     config.load("cognitiveSQL/lang/english.csv")
 
     parser = Parser(database, config)
-
+    from os import sys, path
+    sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
     port = int(os.getenv('PORT', 5000))
 
     print("Starting app on port %d" % port)
