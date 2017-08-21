@@ -232,7 +232,7 @@ def processRequest(req):
         queryString = ""
         table = ""
         for query in queries:
-            table = query.get_from()
+            table = query.get_from().get_table()
             queryString = queryString + str(query)
         print(queryString)
         cur = conn.cursor()

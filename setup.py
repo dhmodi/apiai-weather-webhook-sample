@@ -1,8 +1,10 @@
-#!/usr/bin/env python
-from distutils.core import setup
+from setuptools import setup
 
-setup(name = "virtual-patient",
-      package_dir = {''},
-      packages = ["cognitiveSQL"],
-      scripts = ["app.py"],
-      )
+setup(
+    name='virtual-patient',
+    packages=['cognitiveSQL'],
+    include_package_data=True,
+    install_requires=[
+        'flask',
+    ],
+)
