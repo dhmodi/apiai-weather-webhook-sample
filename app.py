@@ -21,11 +21,6 @@ from flask import request
 from flask import make_response
 from flask import url_for, redirect
 import psycopg2
-from ..cognitiveSQL.Database import Database
-from ..cognitiveSQL.LangConfig import LangConfig
-from cognitiveSQL.Parser import Parser
-from cognitiveSQL.Thesaurus import Thesaurus
-from cognitiveSQL.StopwordFilter import StopwordFilter
 
 
 import apiai
@@ -516,6 +511,13 @@ def makeWebhookDoctorResult(data):
     }
 
 if __name__ == '__main__':
+
+    from cognitiveSQL.Database import Database
+    from cognitiveSQL.LangConfig import LangConfig
+    from cognitiveSQL.Parser import Parser
+    from cognitiveSQL.Thesaurus import Thesaurus
+    from cognitiveSQL.StopwordFilter import StopwordFilter
+
     database = Database()
     database.load("cognitiveSQL/database/employee.sql")
     #database.print_me()
