@@ -5,7 +5,7 @@ import unicodedata
 import importlib
 
 
-from cognitiveSQL.Table import Table
+import cognitiveSQL.Table as Table
 
 #importlib.reload(sys)
 #sys.setdefaultencoding("utf-8")
@@ -76,7 +76,7 @@ class Database:
 
     def create_table(self, table_string):
         lines = table_string.split("\n")
-        table = Table()
+        table = Table.Table()
         for line in lines:
             if 'TABLE' in line:
                 table_name = re.search("`(\w+)`", line)
