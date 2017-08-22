@@ -413,6 +413,8 @@ class WhereParser(Thread):
                 column = self.get_column_name_with_alias_table(columns_of_where[i], table_of_from)
                 operation_type = self.predict_operation_type(previous, current)
                 value = self.get_value(current, _next)
+                if (not(value.isdigit())):
+                    value = "'" + value + "'"
                 #value = 'OOV' # Out Of Vocabulary: feature not implemented yet
                 operator = self.predict_operator(current, _next)
                 where_object.add_condition(junction, Condition(column, operation_type, operator, value))
