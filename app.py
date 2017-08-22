@@ -164,7 +164,7 @@ def processRequest(req):
             yql_url = baseurl + urlencode({'query': json.dumps(symptoms)})
             print(yql_url)
             result = urlopen(yql_url).read()
-            print(json.dumps(result))
+            # print(json.dumps(result))
             data = json.loads(result)
             res = makeWebhookDoctorResult(data)
             return  res
