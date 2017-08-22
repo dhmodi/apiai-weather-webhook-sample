@@ -518,7 +518,7 @@ def makeWebhookDoctorResult(data):
 
 if __name__ == '__main__':
     database = Database.Database()
-    database.load("cognitiveSQL/database/employee.sql")
+    database.load("cognitiveSQL/database/employees.sql")
     #database.print_me()
 
     config = LangConfig.LangConfig()
