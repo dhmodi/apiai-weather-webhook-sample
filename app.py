@@ -242,7 +242,7 @@ def processRequest(req):
         cur = conn.cursor()
         cur.execute(queryString)
         rows = cur.fetchall()
-        outText = "There are " + str(rows[0][0]) + " number of " + str(table) + "s"
+        outText = str(rows[0][0])
         return {
             "speech": outText,
             "displayText": outText,
