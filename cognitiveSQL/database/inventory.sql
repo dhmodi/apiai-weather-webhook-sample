@@ -44,6 +44,7 @@ CREATE TABLE `inventory`` (
     `category`  VARCHAR(14)     NOT NULL,
     `location`   VARCHAR(16)     NOT NULL,
     `DC`      VARCHAR(16)     NOT NULL,
+    `prod_plant` DOUBLE            NOT NULL,
     `USD_total_plant_stock`   DOUBLE            NOT NULL,
     `total_plant_stock`   DOUBLE            NOT NULL,
     `USD_quality_hold`   DOUBLE            NOT NULL,
