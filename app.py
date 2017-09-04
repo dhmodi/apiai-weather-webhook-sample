@@ -56,7 +56,7 @@ def speech():
     return redirect(url_for('static', filename='speech.html'))
 
 @app.route('/inventory')
-def speech():
+def inventory():
     return redirect(url_for('new', filename='index.html'))
 
 @app.route('/webhook', methods=['POST'])
