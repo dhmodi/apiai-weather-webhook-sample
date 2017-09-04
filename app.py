@@ -253,6 +253,47 @@ def processRequest(req):
             # "contextOut": [],
             "source": "Dhaval"
         }
+    elif (req.get("result").get("action") == "inventory.search"):
+        print("Inventory Search")
+        # parameters = req.get("result").get("parameters")
+        # table = parameters.get("tables")
+        # print(table)
+        # attribute = parameters.get("attribute")
+        # operation = parameters.get("operation")
+        # print(operation)
+        # if ((operation[0] is not None) and (operation[0] == "count")):
+        #     cur = conn.cursor()
+        #     cur.execute("select count(*) from " + table[0])
+        #     rows = cur.fetchall()
+        #     print(rows[0])
+        #     outText = "There are " + str(rows[0][0]) + " number of " + str(table[0]) + "s"
+        #     return {
+        #         "speech": outText,
+        #         "displayText": outText,
+        #         # "data": data,
+        #         # "contextOut": [],
+        #         "source": "Dhaval"
+        #     }
+        incoming_query = req.get("result").get("resolvedQuery")
+        queries = parser.parse_sentence(incoming_query)
+        #print(query for query in queries)
+        queryString = ""
+        table = ""
+        for query in queries:
+            table = query.get_from().get_table()
+            queryString = queryString + str(query)
+        print(queryString)
+        cur = conn.cursor()
+        cur.execute(queryString)
+        rows = cur.fetchall()
+        outText = str(rows[0][0])
+        return {
+            "speech": outText,
+            "displayText": outText,
+            # "data": data,
+            # "contextOut": [],
+            "source": "Dhaval"
+        }
 
 def makeYqlQuery(req):
     result = req.get("result")
@@ -534,4 +575,4 @@ if __name__ == '__main__':
 
     print("Starting app on port %d" % port)
 
-    app.run(debug=False, port=port, host='0.0.0.0')
+    app.run(debug=True, port=port, host='0.0.0.0')
