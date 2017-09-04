@@ -53,7 +53,7 @@ conn = psycopg2.connect(
 
 @app.route('/speech')
 def speech():
-    return redirect(url_for('inventory', filename='index.html'))
+    return redirect(url_for('static', filename='index.html'))
 
 # @app.route('/inventory')
 # def inventory():
