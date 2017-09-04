@@ -48,7 +48,7 @@ conn = psycopg2.connect(
 
 @app.route('/')
 def index():
- return {}
+    return redirect(url_for('static_url', filename='index.html'))
 
 
 @app.route('/speech')
