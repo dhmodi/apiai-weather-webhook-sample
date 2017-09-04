@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1f0e5c92-6b92-470d-8d1d-90b7b76ef1d2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cognitiveSQL/Parser.py" afterPath="$PROJECT_DIR$/cognitiveSQL/Parser.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -104,8 +105,8 @@
       <file leaf-file-name="Parser.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cognitiveSQL/Parser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="318" column="46" lean-forward="true" selection-start-line="318" selection-start-column="46" selection-end-line="318" selection-end-column="46" />
+            <state relative-caret-position="152">
+              <caret line="330" column="0" lean-forward="true" selection-start-line="330" selection-start-column="0" selection-end-line="330" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -804,7 +805,14 @@
       <option name="project" value="LOCAL" />
       <updated>1504524669128</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="d">
+      <created>1504524760151</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1504524760151</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1135,8 +1143,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cognitiveSQL/Parser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="318" column="46" lean-forward="true" selection-start-line="318" selection-start-column="46" selection-end-line="318" selection-end-column="46" />
+        <state relative-caret-position="152">
+          <caret line="330" column="0" lean-forward="true" selection-start-line="330" selection-start-column="0" selection-end-line="330" selection-end-column="0" />
           <folding />
         </state>
       </provider>

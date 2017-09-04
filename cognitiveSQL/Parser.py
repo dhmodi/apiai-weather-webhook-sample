@@ -330,9 +330,9 @@ class WhereParser(Thread):
                 break
 
         if first_encountered_junction_offset >= first_encountered_disjunction_offset:
-            return 'AND'
+            return ' AND'
         else: 
-            return 'OR'
+            return ' OR'
 
     def run(self):
         number_of_where_columns = 0
