@@ -46,18 +46,18 @@ conn = psycopg2.connect(
     port=url.port
 )
 
-@app.route('/')
-def index():
-    return redirect(url_for('static_url', filename='index.html'))
+# @app.route('/')
+# def index():
+#     return redirect(url_for('static_url', filename='index.html'))
 
 
 @app.route('/speech')
 def speech():
-    return redirect(url_for('static', filename='speech.html'))
-
-@app.route('/inventory')
-def inventory():
     return redirect(url_for('static_url', filename='index.html'))
+
+# @app.route('/inventory')
+# def inventory():
+#     return redirect(url_for('static_url', filename='index.html'))
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
