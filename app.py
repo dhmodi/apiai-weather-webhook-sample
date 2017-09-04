@@ -286,8 +286,7 @@ def processRequest(req):
         cur = conn.cursor()
         cur.execute(queryString)
         rows = cur.fetchall()
-        for column in rows[0]:
-            outText = str(rows[0][0])
+        outText = ', '.join(rows[0])
         return {
             "speech": outText,
             "displayText": outText,
