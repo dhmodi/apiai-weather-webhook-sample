@@ -412,7 +412,8 @@ class WhereParser(Thread):
                 junction = self.predict_junction(previous, current)
                 column = self.get_column_name_with_alias_table(columns_of_where[i], table_of_from)
                 operation_type = self.predict_operation_type(previous, current)
-                value = self.get_value(current, _next)
+                value = str(self.get_value(current, _next))
+                # print("Value" + str(value))
                 if (not(value.isdigit())):
                     value = "'" + value + "'"
                 #value = 'OOV' # Out Of Vocabulary: feature not implemented yet
