@@ -275,7 +275,7 @@ def processRequest(req):
         #         "source": "Dhaval"
         #     }
         incoming_query = req.get("result").get("resolvedQuery")
-        queries = parser.parse_sentence(incoming_query)
+        queries = parser.parse_sentence(incoming_query.lower())
         #print(query for query in queries)
         queryString = ""
         table = ""
