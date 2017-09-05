@@ -39,37 +39,37 @@ DROP TABLE IF EXISTS dept_emp,
 /*!50503 select CONCAT('storage engine: ', @@default_storage_engine) as INFO */;
 
 CREATE TABLE `inventory`` (
-    `SKU`      INT             NOT NULL,
-    `Calendar_Day`  DATE            NOT NULL,
+    `sku`      INT             NOT NULL,
+    `calendar_Day`  DATE            NOT NULL,
     `category`  VARCHAR(14)     NOT NULL,
     `location`   VARCHAR(16)     NOT NULL,
-    `DC`      VARCHAR(16)     NOT NULL,
+    `dc`      VARCHAR(16)     NOT NULL,
     `prod_plant` DOUBLE            NOT NULL,
-    `USD_total_plant_stock`   DOUBLE            NOT NULL,
+    `usd_total_plant_stock`   DOUBLE            NOT NULL,
     `total_plant_stock`   DOUBLE            NOT NULL,
-    `USD_quality_hold`   DOUBLE            NOT NULL,
+    `usd_quality_hold`   DOUBLE            NOT NULL,
     `quality_hold`   DOUBLE            NOT NULL,
-    `USD_Safety_Stock`   DOUBLE            NOT NULL,
+    `usd_safety_stock`   DOUBLE            NOT NULL,
     `safety_stock`   DOUBLE            NOT NULL,
-    `USD Cycle Stock`   DOUBLE            NOT NULL,
-    `Cycle Stock`   DOUBLE            NOT NULL,
-    `USD Transit Stock`   DOUBLE            NOT NULL,
-    `Transit Stock`   DOUBLE            NOT NULL,
-    `USD_excess`   DOUBLE            NOT NULL,
+    `usd_cycle_stock`   DOUBLE            NOT NULL,
+    `cycle_stock`   DOUBLE            NOT NULL,
+    `usd_transit_stock`   DOUBLE            NOT NULL,
+    `transit_stock`   DOUBLE            NOT NULL,
+    `usd_excess`   DOUBLE            NOT NULL,
     `excess`   DOUBLE            NOT NULL,
-    PRIMARY KEY (`SKU`,`DC`)
+    PRIMARY KEY (`sku`,`dc`)
 );
 
 CREATE TABLE `Forecast_vs_Actual` (
-    `Calendar Year_Month`     DATE         NOT NULL,
-    `SKU`    INT             NOT NULL,
-    `DC`      VARCHAR(16)     NOT NULL,
+    `calendar_year_month`     DATE         NOT NULL,
+    `sku`    INT             NOT NULL,
+    `dc`      VARCHAR(16)     NOT NULL,
     `category`  VARCHAR(14)     NOT NULL,
     `actual_total_inventory`    DOUBLE            NOT NULL,
     `actual_production`    DOUBLE            NOT NULL,
     `actual_demand`    DOUBLE            NOT NULL,
     `forecast_demand`    DOUBLE            NOT NULL,
-    PRIMARY KEY (`SKU`, `DC`)
+    PRIMARY KEY (`sku`, `dc`)
 );
 
 CREATE TABLE `dept_manager` (
