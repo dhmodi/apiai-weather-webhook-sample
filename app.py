@@ -287,7 +287,7 @@ def processRequest(req):
         cur.execute(queryString)
         rows = cur.fetchall()
         # outText = ', '.join(str(x) for x in rows[0])
-        outText = ','.join(str(element) for row in rows for element in row)
+        outText = ', '.join(str(element).split(".")[0] for row in rows for element in row)
         # print(','.join(str(element) for row in rows for element in row))
         return {
             "speech": outText,
@@ -577,4 +577,4 @@ if __name__ == '__main__':
 
     print("Starting app on port %d" % port)
 
-    app.run(debug=True, port=port, host='0.0.0.0')
+    app.run(debug=True, port=port, host='localhost')
