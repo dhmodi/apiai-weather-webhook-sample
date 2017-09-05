@@ -6,7 +6,7 @@ COUNT: number, how many, count, many
 JUNCTION: and
 DISJUNCTION: or
 GREATER: greater, more
-LESS: less, lesser
+LESS: less, lesser, less than
 BETWEEN: between
 ORDER: order
 GROUP: group
