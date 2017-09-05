@@ -20,7 +20,7 @@
       <file leaf-file-name="app.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1138">
+            <state relative-caret-position="445">
               <caret line="579" column="48" lean-forward="false" selection-start-line="579" selection-start-column="48" selection-end-line="579" selection-end-column="48" />
               <folding>
                 <element signature="e#23#60#0" expanded="true" />
@@ -543,13 +543,6 @@
       <option name="presentableId" value="Default" />
       <updated>1499410689410</updated>
     </task>
-    <task id="LOCAL-00013" summary="database integration">
-      <created>1503231932561</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1503231932561</updated>
-    </task>
     <task id="LOCAL-00014" summary="database integration">
       <created>1503233143369</created>
       <option name="number" value="00014" />
@@ -886,7 +879,14 @@
       <option name="project" value="LOCAL" />
       <updated>1504610070123</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="d">
+      <created>1504611370408</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1504611370408</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1265,7 +1265,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1138">
+        <state relative-caret-position="445">
           <caret line="579" column="48" lean-forward="false" selection-start-line="579" selection-start-column="48" selection-end-line="579" selection-end-column="48" />
           <folding>
             <element signature="e#23#60#0" expanded="true" />
