@@ -60,7 +60,7 @@ CREATE TABLE `inventory`` (
     PRIMARY KEY (`sku`,`dc`)
 );
 
-CREATE TABLE `Forecast_vs_Actual` (
+CREATE TABLE `forecast_vs_actual` (
     `calendar_year_month`     DATE         NOT NULL,
     `sku`    INT             NOT NULL,
     `dc`      VARCHAR(16)     NOT NULL,
