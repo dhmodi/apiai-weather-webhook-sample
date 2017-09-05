@@ -57,7 +57,7 @@ CREATE TABLE `inventory`` (
     `transit_stock`   DOUBLE            NOT NULL,
     `usd_excess`   DOUBLE            NOT NULL,
     `excess`   DOUBLE            NOT NULL,
-    PRIMARY KEY (`sku`,`dc`)
+    PRIMARY KEY (`sku`)
 );
 
 CREATE TABLE `forecast_vs_actual` (
@@ -69,7 +69,7 @@ CREATE TABLE `forecast_vs_actual` (
     `actual_production`    DOUBLE            NOT NULL,
     `actual_demand`    DOUBLE            NOT NULL,
     `forecast_demand`    DOUBLE            NOT NULL,
-    PRIMARY KEY (`sku`,`dc`)
+    PRIMARY KEY (`sku`)
 );
 
 CREATE TABLE `dept_manager` (

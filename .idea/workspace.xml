@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1f0e5c92-6b92-470d-8d1d-90b7b76ef1d2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cognitiveSQL/database/inventory.sql" afterPath="$PROJECT_DIR$/cognitiveSQL/database/inventory.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cognitiveSQL/lang/english.csv" afterPath="$PROJECT_DIR$/cognitiveSQL/lang/english.csv" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,7 +19,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="app.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="445">
@@ -71,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="inventory.sql" pinned="false" current-in-tab="false">
+      <file leaf-file-name="inventory.sql" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cognitiveSQL/database/inventory.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="50" column="17" lean-forward="false" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="17" />
+            <state relative-caret-position="517">
+              <caret line="71" column="22" lean-forward="false" selection-start-line="71" selection-start-column="22" selection-end-line="71" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -84,8 +86,8 @@
       <file leaf-file-name="english.csv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cognitiveSQL/lang/english.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="8" column="29" lean-forward="false" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
+            <state relative-caret-position="66">
+              <caret line="3" column="37" lean-forward="false" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -185,9 +187,9 @@
         <option value="$PROJECT_DIR$/static/index.html" />
         <option value="$PROJECT_DIR$/static/js/functions.js" />
         <option value="$PROJECT_DIR$/cognitiveSQL/Parser.py" />
-        <option value="$PROJECT_DIR$/cognitiveSQL/database/inventory.sql" />
-        <option value="$PROJECT_DIR$/cognitiveSQL/lang/english.csv" />
         <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/cognitiveSQL/lang/english.csv" />
+        <option value="$PROJECT_DIR$/cognitiveSQL/database/inventory.sql" />
       </list>
     </option>
   </component>
@@ -543,13 +545,6 @@
       <option name="presentableId" value="Default" />
       <updated>1499410689410</updated>
     </task>
-    <task id="LOCAL-00015" summary="database integration">
-      <created>1503317133075</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1503317133075</updated>
-    </task>
     <task id="LOCAL-00016" summary="database integration">
       <created>1503317520164</created>
       <option name="number" value="00016" />
@@ -886,7 +881,14 @@
       <option name="project" value="LOCAL" />
       <updated>1504611585582</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="d">
+      <created>1504611935493</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1504611935493</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1247,22 +1249,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cognitiveSQL/database/inventory.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="50" column="17" lean-forward="false" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cognitiveSQL/lang/english.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="29" lean-forward="false" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="445">
@@ -1270,6 +1256,22 @@
           <folding>
             <element signature="e#23#60#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cognitiveSQL/lang/english.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="37" lean-forward="false" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cognitiveSQL/database/inventory.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="517">
+          <caret line="71" column="22" lean-forward="false" selection-start-line="71" selection-start-column="22" selection-end-line="71" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
