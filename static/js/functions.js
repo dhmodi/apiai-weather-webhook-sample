@@ -109,7 +109,7 @@ var baseUrl = "https://api.api.ai/v1/";
 var messages = [], //array that hold the record of each string in chat
 lastUserMessage = "", //keeps track of the most recent input string from the user
 botMessage = "", //var keeps track of what the chatbot is going to say
-botName = 'Inventory Manager'; //name of the chatbot
+botName = 'Assistant'; //name of the chatbot
 
 function startRecognition() {
 	recognition = new webkitSpeechRecognition();
